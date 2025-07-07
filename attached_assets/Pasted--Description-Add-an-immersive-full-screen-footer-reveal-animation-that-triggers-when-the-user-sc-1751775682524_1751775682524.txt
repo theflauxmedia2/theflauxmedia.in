@@ -1,0 +1,65 @@
+📦 Description:
+
+Add an immersive full-screen footer reveal animation that triggers when the user scrolls to the bottom of the page. The footer should display only the brand name “THE FLAUX MEDIA” in bold, centered, capital text — full screen, clean black background — with all other page elements fading out or sliding away. Inspired by the ending animation on the Schbang website.
+
+⸻
+
+🧠 Replit Prompt:
+
+⸻
+
+Add a full-page takeover footer animation to my existing website. Here’s exactly what it should do:
+
+🖼️ Visual:
+	•	When the user reaches the bottom of the page:
+	•	All other content (main sections) should fade out or slide up and disappear.
+	•	A full-screen black background should appear.
+	•	Centered in the viewport, the brand name “THE FLAUX MEDIA” should appear in extra bold, white, uppercase text, taking over the screen.
+	•	Font size should scale to fit the screen (responsive) — around text-7xl on desktop.
+
+⸻
+
+🔄 Animation Behavior:
+	•	Trigger on scroll when user hits ~95–100% of page height (window.scrollY + window.innerHeight >= document.body.offsetHeight)
+	•	Apply fade-out animation to all content above (use .fade-out class with opacity-0 + transition)
+	•	Fade-in the footer takeover (opacity-0 → opacity-100 with a delay)
+	•	Smooth transition: no jarring cuts — use Tailwind transitions or Framer Motion
+	•	Optional enhancement: when user scrolls back up, the full-screen footer hides and content fades back in
+
+⸻
+
+📱 Responsiveness:
+	•	Works on both desktop and mobile
+	•	Text scales down to text-3xl or text-4xl on mobile devices
+	•	Full-viewport height: h-screen, no scrollbars visible when active
+
+⸻
+
+💡 Extra Tips:
+	•	Wrap the existing <main> content in a <div id="page-content"> to easily apply .fade-out class
+	•	Use a separate <div id="footer-takeover"> absolutely/fixed positioned at bottom
+	•	Add z-[999] on takeover footer to appear above all other content
+	•	Include a one-time scroll trigger using IntersectionObserver or a simple JS condition
+	•	Add Tailwind utility classes for transitions like:
+
+transition-opacity duration-700 ease-in-out
+
+
+
+⸻
+
+🧪 Suggested JS (simplified trigger):
+
+window.addEventListener('scroll', () => {
+  const bodyHeight = document.body.offsetHeight;
+  const scrollBottom = window.scrollY + window.innerHeight;
+  if (scrollBottom >= bodyHeight - 50) {
+    document.getElementById('page-content').classList.add('opacity-0');
+    document.getElementById('footer-takeover').classList.remove('hidden');
+  } else {
+    document.getElementById('page-content').classList.remove('opacity-0');
+    document.getElementById('footer-takeover').classList.add('hidden');
+  }
+});
+
+

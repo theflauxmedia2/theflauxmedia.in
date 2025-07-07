@@ -1,0 +1,166 @@
+Build a fully responsive, modern, and animated landing page for a Social Media Marketing Agency named The Flaux Media.
+
+⸻
+
+🎨 Brand Identity
+	•	Theme: Black (#0A0A0A), White (#FFFFFF), and Vibrant Orange (#F76300)
+	•	Mood: Bold, minimal, and confident
+	•	Typography: Clean sans-serif fonts like Inter or General Sans (extra-bold for headings)
+	•	Inspiration: Visual polish and motion design similar to Schbang, Dzinr, and Adko
+
+⸻
+
+🌐 GENERAL STRUCTURE
+	•	Single-page site with section-based scrolling
+	•	Smooth transitions between sections (fade-in, slide-up)
+	•	Subtle micro-interactions (hover, click, scroll)
+	•	Page-load animation (logo scale-in, fade background, text slide)
+	•	Page-switch transitions if multipage: fade-through or wipe animations using GSAP or Framer Motion
+
+⸻
+
+🧩 WEBSITE COMPONENTS
+
+⸻
+
+✅ 1. Smart Scroll-Based Navbar System
+
+Initial Top Navbar:
+	•	Placement: Fixed top, transparent background
+	•	Content: Centered logo (The Flaux Media), nav links: Projects, Merch, Team, Contact
+	•	Typography: White text, spaced uppercase letters, subtle hover underlines
+	•	Animation: Fade-in on page load
+
+Scrolled State:
+	•	Top navbar fades out
+	•	Bottom Floating Navbar appears (sticky):
+	•	Rounded pill-shaped container (rounded-full, shadow-lg, px-6 py-2)
+	•	Items: Services, Projects, Team, Contact (orange CTA)
+	•	Smooth fade/slide-in (e.g., fadeInUp)
+	•	Scroll-triggered appearance and hides when at top
+
+Behavior:
+	•	Smooth scroll on click
+	•	JS scroll listener toggles navbar
+	•	Fully responsive: collapses into mobile menu with slide animation
+
+⸻
+
+✅ 2. Hero Section (Modern, Bold, Animated)
+
+Structure:
+	•	Full-screen section with centered layout
+	•	Minimal dot (•) centered above headline
+	•	Main Heading (animated on load):
+“Your Creative, Media & Technology Transformation Partner”
+	•	text-6xl, font-extrabold, animated word-by-word or line-by-line on entry
+	•	Subheading:
+“We’re a team of 1000+ specialists delivering award-winning work…”
+	•	text-gray-500, text-lg
+
+Animated Marquee:
+	•	Repeating text strip at bottom of hero
+	•	IT’S TIME TO BUILD WITH FLAUX MEDIA (looping with ★ or ⭑)
+	•	Outlined text (stroke-2, transparent fill)
+	•	Continuous horizontal scroll animation using CSS keyframes
+
+Extras:
+	•	Scroll-down indicator (bouncing arrow)
+	•	CTA Button: See What We Do → (smooth scroll to Services)
+	•	Hero section animates in on page load (e.g., fade + scale + translate)
+
+⸻
+
+✅ 3. What Defines Us – Interactive Identity Section
+
+Layout:
+	•	Two-column section with bold left-side rotating arrow and right-side text content
+
+Left Side:
+	•	Bold, black arrow graphic
+	•	Arrow follows cursor direction smoothly
+	•	Uses mousemove + atan2 to calculate rotation angle
+	•	Arrow animates with easing and transitions
+	•	Optional SVG background grid for depth
+
+Right Side:
+	•	Heading: What defines us (text-5xl)
+	•	Subheading: Bold, expressive block paragraph
+	•	Mission Statement: Gray text, mid-sized
+	•	CTA: Dive Into Our Culture → (black pill button, hover animation)
+
+Animation:
+	•	Section slides in on scroll (use AOS or Framer Motion)
+	•	Arrow rotates dynamically, degrades gracefully on mobile
+
+⸻
+
+✅ 4. Our Services – Animated Grid Showcase
+
+Layout:
+	•	Split layout: Left (title + animated arrow), Right (2×2 card grid)
+
+Left Side:
+	•	Title: Our Services (extra bold, white)
+	•	Animated arrow + orange glowing dot
+	•	Fade/slide in from left on scroll
+
+Right Side:
+	•	Responsive 4-card grid (Logo Designing, Branding, Packaging Design, Graphic Design)
+	•	Cards:
+	•	bg-neutral-900, rounded-xl, shadow-md
+	•	White circle icon with orange icon inside (pen, diamond, etc.)
+	•	Title: text-xl font-semibold text-white
+	•	Description: text-sm text-gray-400
+	•	Hover: Scale-up, border-glow, background lightens
+
+Responsive Grid:
+	•	Desktop: 2x2 layout
+	•	Tablet: 2 per row
+	•	Mobile: 1 column (stacked)
+
+Animation:
+	•	Cards animate in with staggered delay on scroll
+	•	Hover micro-interactions (icon wiggle, slight glow, scale)
+
+⸻
+
+✅ 5. Overall Motion & Transitions (Inspired by Adko, Schbang, Dzinr)
+	•	Page load: Logo fade/scale in → Hero text slide → background blur reveal
+	•	Section transitions: Fade-up or Wipe-in with staggered text entry
+	•	Navbar: Smooth in/out animations on scroll
+	•	On-hover effects:
+	•	Buttons: Slide arrow icon
+	•	Nav links: Underline slide or glowing text
+	•	Cards: Lift on hover (scale-105, smooth)
+	•	Marquee: Continuous scroll with subtle easing
+	•	Interactions: Scroll smoothing, easing-in everywhere
+	•	Use Framer Motion or GSAP for page and section transitions (fallback to Tailwind + JS if needed)
+
+⸻
+
+🛠 TECH & TOOLING
+	•	Tailwind CSS (core styling)
+	•	JavaScript (scroll/rotation logic, navbar toggle)
+	•	GSAP or Framer Motion (animations and transitions)
+	•	Lucide / Heroicons / Phosphor Icons (SVG icons)
+	•	Fonts: Inter / General Sans (via Google Fonts)
+
+⸻
+
+✅ DELIVERABLE OUTPUT
+	•	Fully responsive, high-performance landing page
+	•	Smooth animations and scroll effects
+	•	Scroll-reactive navbar system (top/bottom state)
+	•	Cursor-following arrow in “What Defines Us”
+	•	Clean, bold services showcase
+	•	Scroll-triggered animations
+	•	All transitions optimized for Replit’s free agentic limits
+
+⸻
+
+🧠 Bonus Note to Replit Agent:
+	•	Optimize for low-resource environments
+	•	Defer non-critical JS where possible
+	•	Load animations conditionally or with Intersection Observer
+	•	Use Tailwind utility classes instead of custom CSS where efficient

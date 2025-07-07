@@ -29,13 +29,13 @@ export default function Services() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Left Side - Title and Arrow */}
-          <div className="section-animate text-center lg:text-left">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[var(--flaux-white)] mb-6 sm:mb-8 leading-tight">
-              Our Services
+          <div className="section-animate text-left">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-[var(--flaux-white)] mb-6 sm:mb-8 leading-tight">
+              Our <br /> Services
             </h2>
-            <p className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0">
-              We offer comprehensive digital solutions that cover every aspect of your brand's creative and technical needs.
-            </p>
+              {/* <p className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0">
+                We offer comprehensive digital solutions that cover every aspect of your brand's creative and technical needs.
+              </p> */}
           </div>
           
           {/* Right Side - Services Grid */}

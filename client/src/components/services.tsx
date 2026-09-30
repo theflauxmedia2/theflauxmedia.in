@@ -1,26 +1,29 @@
-import { ArrowRight, Pen, Gem, Package, Palette } from "lucide-react";
+import { ArrowRight, Pen, Gem, Package, Palette, Camera, Code } from "lucide-react";
+import { useLocation } from "wouter";
 
 export default function Services() {
+  const [, setLocation] = useLocation();
+  
   const services = [
-    {
-      icon: Pen,
-      title: "Logo Designing",
-      description: "Creating memorable visual identities that capture your brand's essence and leave lasting impressions.",
-    },
-    {
-      icon: Gem,
-      title: "Branding",
-      description: "Comprehensive brand strategies that establish your unique position in the market and connect with audiences.",
-    },
-    {
-      icon: Package,
-      title: "Packaging Design",
-      description: "Innovative packaging solutions that protect, inform, and inspire customers to choose your products.",
-    },
     {
       icon: Palette,
       title: "Graphic Design",
-      description: "Striking visual communications that engage your audience and amplify your message across all platforms.",
+      description: "Visual storytelling that captivates your audience and strengthens your brand presence across every platform.",
+    },
+    {
+      icon: Gem,
+      title: "Media",
+      description: "Building brand strategies that position you uniquely in the market and connect deeply with your audience.",
+    },
+    {
+      icon: Camera, // Replace with the actual icon you're using
+      title: "Film & Photography",
+      description: "High-quality visuals and cinematic storytelling that elevate your brand’s voice and capture your audience’s attention.",
+    },
+    {
+      icon: Code, // Replace with the actual icon you're using (e.g., CodeIcon, Terminal, etc.)
+      title: "Web Development",
+      description: "High-performance, visually stunning websites blending creativity and technology — powered by TheFlauxMedia × TheApexDev.",
     },
   ];
 
@@ -29,7 +32,7 @@ export default function Services() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Left Side - Title and Arrow */}
-          <div className="section-animate text-left">
+          <div className="section-animate visible text-left">
             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-[var(--flaux-white)] mb-6 sm:mb-8 leading-tight">
               Our <br /> Services
             </h2>
@@ -39,15 +42,23 @@ export default function Services() {
           </div>
           
           {/* Right Side - Services Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 p-4 section-animate visible">
             {services.map((service, index) => (
               <div 
                 key={service.title}
-                className={`group section-animate card-hover bg-[var(--flaux-gray)] rounded-xl p-6 sm:p-8 border border-[var(--flaux-light-gray)] hover:border-[var(--flaux-orange)] ${
+                className={`group section-animate visible card-hover bg-[var(--flaux-gray)] rounded-xl p-6 sm:p-8 border border-[var(--flaux-light-gray)] hover:border-[var(--flaux-orange)] ${
                   index === 1 ? 'stagger-1' : 
                   index === 2 ? 'stagger-2' : 
                   index === 3 ? 'stagger-3' : ''
                 }`}
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  if (service.title === "Web Development") {
+                    window.open("https://www.theapexdev.site", "_blank");
+                  } else {
+                    setLocation("/services");
+                  }
+                }}
               >
                 <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[var(--flaux-white)] rounded-full flex items-center justify-center mb-4 sm:mb-6">
                   <service.icon className="text-xl sm:text-2xl text-[var(--flaux-orange)]" size={24} />

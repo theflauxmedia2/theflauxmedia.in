@@ -1,14 +1,15 @@
 import { useState, useEffect, forwardRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Menu } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 
 const TOP_NAV_LINKS_LEFT = [
-  { href: "#projects", label: "Projects" },
-  { href: "/", label: "Testimonials" },
+  { href: "/", label: "Home" },
+  { href: "/our-work", label: "Our Work" },
+  { href: "#testimonials", label: "Testimonials" },
 ];
 const TOP_NAV_LINKS_RIGHT = [
-  { href: "/packages", label: "Packages" },
+  { href: "/services", label: "Services" },
   { href: "#contact", label: "Contact", isButton: true },
 ];
 
@@ -22,6 +23,7 @@ function scrollToSection(href: string) {
 const Navbar = forwardRef<HTMLDivElement>((props, ref) => {
   const [showTop, setShowTop] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [, setLocation] = useLocation();
 
   useEffect(() => {
     const onScroll = () => {
@@ -31,9 +33,20 @@ const Navbar = forwardRef<HTMLDivElement>((props, ref) => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close mobile menu on nav
+  // Handle navigation: scroll for hash links, navigate for routes
   const handleNavClick = (href: string) => {
-    scrollToSection(href);
+    if (!href) return;
+    const isHash = href.startsWith("#");
+    if (isHash) {
+      // If we're not on the home page, navigate to home with hash
+      if (window.location.pathname !== "/") {
+        setLocation(`/${href}`); // e.g. /#testimonials
+      } else {
+        scrollToSection(href);
+      }
+    } else {
+      setLocation(href);
+    }
     setMobileMenuOpen(false);
   };
 
@@ -54,8 +67,8 @@ const Navbar = forwardRef<HTMLDivElement>((props, ref) => {
               <div className="container mx-auto px-4 py-2 flex items-center justify-between">
                 {/* Logo on the left */}
                 <div className="flex-shrink-0 flex items-center">
-                  <Link href="/" className="inline-flex items-center scale-150 px-2 focus:outline-none">
-                    <img src="/logo/logo.png" alt="Logo" className="h-14 w-auto" />
+                  <Link href="/" className="inline-flex items-center scale-150 px-5 mt-3 focus:outline-none">
+                    <img src="/logo/logo.png" alt="Logo" className="h-17 w-12" />
                   </Link>
                 </div>
                 {/* Desktop Nav Links */}
@@ -71,14 +84,14 @@ const Navbar = forwardRef<HTMLDivElement>((props, ref) => {
                         <ArrowRight size={16} />
                       </Link>
                     ) : (
-                      <Link
+                      <button
                         key={link.label}
-                        href={link.href}
+                        onClick={() => handleNavClick(link.href)}
                         className="text-white/90 hover:text-orange-400 transition-colors font-medium text-base px-2 py-1 relative group"
                       >
                         {link.label}
                         <span className="absolute left-0 -bottom-0.5 w-0 h-0.5 bg-orange-400 transition-all duration-300 group-hover:w-full"></span>
-                      </Link>
+                      </button>
                     )
                   )}
                 </div>
@@ -115,13 +128,13 @@ const Navbar = forwardRef<HTMLDivElement>((props, ref) => {
                           <ArrowRight size={16} />
                         </Link>
                       ) : (
-                        <Link
+                        <button
                           key={link.label}
-                          href={link.href}
+                          onClick={() => handleNavClick(link.href)}
                           className="text-white/90 hover:text-orange-400 transition-colors font-medium text-base px-2 py-2 w-full text-left"
                         >
                           {link.label}
-                        </Link>
+                        </button>
                       )
                     )}
                   </motion.div>

@@ -1,0 +1,28 @@
+{
+  "name": "The Flaux Media - Creative Media & Technology Transformation Partner",
+  "short_name": "The Flaux Media",
+  "description": "Creative Media & Technology Transformation Partner delivering social media marketing, brand films, photography and growth-focused campaigns.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#F76300",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo/favicon.ico",
+      "sizes": "16x16 32x32",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/logo/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "marketing", "photography", "web development"],
+  "lang": "en",
+  "scope": "/",
+  "id": "the-flaux-media"
+}
+

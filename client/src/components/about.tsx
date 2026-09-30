@@ -1,15 +1,9 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "wouter";
 import { useCursorArrow } from "@/hooks/use-cursor-arrow";
 
 export default function About() {
   const { arrowRef, containerRef } = useCursorArrow();
-
-  const scrollToTeam = () => {
-    const element = document.querySelector('#team');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section id="about" className="py-16 sm:py-20 lg:py-24 bg-[var(--flaux-black)]">
@@ -42,19 +36,22 @@ export default function About() {
             </h2>
             <div className="space-y-4 sm:space-y-6">
               <p className="text-lg sm:text-xl lg:text-2xl font-bold text-[var(--flaux-white)] leading-relaxed">
-                We believe in the power of creative storytelling, cutting-edge technology, and strategic thinking to transform brands and drive meaningful connections.
+                At The Flaux Media, we believe that creativity and strategy go hand in hand.
               </p>
               <p className="text-base sm:text-lg text-gray-400 leading-relaxed">
-                Our mission is to help businesses navigate the digital landscape with confidence, creating experiences that not only look stunning but deliver measurable results. Every project is an opportunity to push boundaries and redefine what's possible.
+                Through powerful storytelling, innovative design, and technology-driven execution, we help brands stand out and connect with their audience in meaningful ways.
               </p>
-              <div className="pt-4 sm:pt-6">
-                <button
-                  onClick={scrollToTeam}
+              <p className="text-base sm:text-lg text-gray-400 leading-relaxed">
+                Our mission is to craft digital experiences that inspire action, build trust, and deliver measurable impact — turning ideas into visuals that move people and brands forward.
+              </p>
+              <div className="pt-4 m-4 mb-2 sm:pt-6">
+                <Link
+                  href="/contact"
                   className="inline-flex items-center bg-[var(--flaux-black)] border border-[var(--flaux-orange)] text-[var(--flaux-orange)] px-6 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[var(--flaux-orange)] hover:text-[var(--flaux-white)] transition-all duration-300 transform hover:scale-105 font-medium text-sm sm:text-base"
                 >
                   <span className="mr-2">Dive Into Our Culture</span>
                   <ArrowRight size={18} className="sm:w-5 sm:h-5" />
-                </button>
+                </Link>
               </div>
             </div>
           </div>

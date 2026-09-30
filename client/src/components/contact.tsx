@@ -1,4 +1,4 @@
-import { Mail, Phone, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Mail, Phone, Instagram, Linkedin, MessageCircle } from "lucide-react";
 
 export default function Contact() {
   return (
@@ -15,11 +15,11 @@ export default function Contact() {
             
             <div className="flex flex-col gap-4 sm:gap-6 justify-center items-center max-w-lg mx-auto">
               <a 
-                href="mailto:hello@flauxmedia.com"
+                href="mailto:theflauxmedia@gmail.com"
                 className="w-full sm:w-auto inline-flex items-center justify-center bg-[var(--flaux-orange)] text-[var(--flaux-white)] px-6 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 font-medium text-sm sm:text-base"
               >
                 <Mail className="mr-2 sm:mr-3" size={18} />
-                <span>info@flauxmedia.com</span>
+                <span>theflauxmedia@gmail.com</span>
               </a>
               <a 
                 href="tel:+91-9019850972"
@@ -32,13 +32,13 @@ export default function Contact() {
             
             <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-[var(--flaux-light-gray)]">
               <div className="flex justify-center space-x-6 sm:space-x-8">
-                <a href="#" className="text-gray-400 hover:text-[var(--flaux-orange)] transition-colors duration-300 p-2">
-                  <Twitter size={24} className="sm:w-8 sm:h-8" />
+                <a href="https://wa.me/919019850972" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-gray-400 hover:text-[var(--flaux-orange)] transition-colors duration-300 p-2">
+                  <MessageCircle size={24} className="sm:w-8 sm:h-8" />
                 </a>
-                <a href="#" className="text-gray-400 hover:text-[var(--flaux-orange)] transition-colors duration-300 p-2">
+                <a href="https://instagram.com/theflauxmedia" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-gray-400 hover:text-[var(--flaux-orange)] transition-colors duration-300 p-2">
                   <Instagram size={24} className="sm:w-8 sm:h-8" />
                 </a>
-                <a href="#" className="text-gray-400 hover:text-[var(--flaux-orange)] transition-colors duration-300 p-2">
+                <a href="#" className="text-gray-400 hover:text-[var(--flaux-orange)] transition-colors duration-300 p-2" aria-label="LinkedIn">
                   <Linkedin size={24} className="sm:w-8 sm:h-8" />
                 </a>
               </div>

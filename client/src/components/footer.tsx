@@ -1,15 +1,16 @@
 export default function Footer() {
   return (
-    <footer className="py-12 bg-[var(--flaux-black)] border-t border-[var(--flaux-light-gray)] rounded-b-3xl">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="text-2xl font-bold text-[var(--flaux-white)] mb-4 md:mb-0">
-            THE FLAUX MEDIA
-          </div>
-          <div className="text-gray-400 text-sm">
-            © 2025 The Flaux Media. All rights reserved.
-          </div>
-        </div>
+    <footer
+      className="footer-takeover fixed inset-0 z-0 flex flex-col items-center justify-center pointer-events-none"
+      aria-label="The Flaux Media"
+    >
+      <h2 className="text-6xl sm:text-7xl md:text-[12vw] font-black text-[var(--flaux-white)] uppercase tracking-wider text-center footer-takeover-text leading-none px-4">
+        THE FLAUX
+        <br />
+        MEDIA
+      </h2>
+      <div className="mt-6 text-gray-400 text-sm text-center">
+        © 2025 The Flaux Media. All rights reserved.
       </div>
     </footer>
   );

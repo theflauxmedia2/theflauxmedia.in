@@ -29,7 +29,7 @@ export default function About() {
             <h2 className="text-3xl sm:text-4xl font-black mb-8">Our Story</h2>
             <div className="space-y-6 text-lg leading-relaxed text-gray-300">
               <p>
-                Founded in 2020, The Flaux Media emerged from a simple belief: every brand has a unique story worth telling. What started as a small creative studio has grown into a full-service digital agency with over 1000 specialists worldwide.
+                Founded in 2025, The Flaux Media emerged from a simple belief: every brand has a unique story worth telling. What started as a small creative studio has grown into a full-service digital agency with over 1000 specialists worldwide.
               </p>
               <p>
                 Our journey began with a focus on visual identity and has evolved to encompass every aspect of digital transformation. From startups to Fortune 500 companies, we've helped brands discover their voice and amplify their message across all channels.

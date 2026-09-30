@@ -1,0 +1,126 @@
+{
+  "videos": [
+    {
+        "title": "Global Computers",
+        "link": "https://youtube.com/shorts/ZFzHWZ5TM4Q?feature=shared",
+        "description": "Our client wanted every moment of the event to feel as intense as the game itself. From the clutch rounds to the crowd’s roar, we captured the energy, chaos, and glory that define esports. Edited with fast cuts, synced beats, and pure adrenaline to match Valorant’s vibe. 🎥 Shot & crafted by our team for the gamers, by the gamers.",
+        "format": "portrait",
+        "tags": ["Valorant", "GamingEvent", "Esports", "TheFlauxMedia"]
+      },
+      {
+        "title": "Macaw",
+        "link": "https://youtube.com/shorts/59cyTFZRU_k?si=agcbl-8L1Eu5k0er",
+        "description": "Client wanted a fast-transition short to grab attention within seconds — showcasing their dishes, ambience, and service in a dynamic, trendy style. We focused on snappy cuts, motion-driven shots, and rhythmic editing to make the restaurant stand out on social media. Shot, Edited & Produced by TheFlauxMedia.",
+        "format": "portrait",
+        "tags": ["RestaurantReel", "FastTransitions", "FoodShorts", "TheFlauxMedia"]
+      },
+      {
+        "title": "Moai",
+        "link": "https://youtube.com/shorts/S8KVdFh0e8M?feature=shared",
+        "description": "Client wanted a heartfelt Raksha Bandhan short where we interviewed siblings enjoying a meal together, capturing their love, laughter, and memories over food. The goal was to promote the restaurant’s Raksha Bandhan special offer while showcasing genuine emotions and festive vibes. 🎬 Concept, Shoot & Edit by TheFlauxMedia.",
+        "format": "portrait",
+        "tags": ["RakshaBandhan", "RestaurantReel", "SiblingsLove", "TheFlauxMedia"]
+      },
+      {
+        "title": "Stories Brewery and Kitchen",
+        "link": "https://youtube.com/shorts/JcL7wL15VvU?feature=shared",
+        "description": "Client wanted a short video to promote their limited-time food discount offer, highlighting the best dishes and restaurant vibe to attract more walk-ins. 🎬 Shot & Edited by TheFlauxMedia.",
+        "format": "portrait",
+        "tags": ["RestaurantOffer", "FoodReel", "Shorts", "TheFlauxMedia"]
+      },
+      {
+        "title": "Stories 2.0",
+        "link": "https://youtube.com/shorts/r5NA_SSAVAc?feature=shared",
+        "description": "Client wanted to highlight their signature dishes with a calm, cozy vibe that reflects the restaurant’s mood. We focused on close-up textures, ambient lighting, and smooth motion to make every frame feel edible. 🎥 Shot, edited, and color-graded by our team.",
+        "format": "portrait",
+        "tags": ["FoodReel", "CafeVibes", "AestheticEats", "TheFlauxMedia"]
+      },
+      {
+        "title": "Stories 2.0 (Timeless Version)",
+        "link": "https://youtube.com/shorts/pvMbxPpsbT8?feature=shared",
+        "description": "The requirement was to keep it subtle and timeless. We built a clean visual flow that feels luxurious without overdoing it — perfect lighting, elegant frames, silent storytelling.",
+        "format": "portrait",
+        "tags": ["ModernAesthetic", "BrandReel", "TheFlauxMedia"]
+      },
+      {
+        "title": "Stories - Nagarbhavi",
+        "link": "https://youtube.com/shorts/vga3jXjWx5s?feature=shared",
+        "description": "The requirement was to keep it subtle and timeless. We built a clean visual flow that feels luxurious without overdoing it — perfect lighting, elegant frames, silent storytelling.",
+        "format": "portrait",
+        "tags": ["ModernAesthetic", "BrandReel", "TheFlauxMedia"]
+      },
+      {
+        "title": "Stories - Rajajinagar",
+        "link": "https://youtube.com/shorts/8v0snJK2lWM?feature=shared",
+        "description": "Client wanted to highlight their signature dishes with a calm, cozy vibe that reflects the restaurant’s mood. We focused on close-up textures, ambient lighting, and smooth motion to make every frame feel edible. 🎥 Shot, edited, and color-graded by our team.",
+        "format": "portrait",
+        "tags": ["FoodReel", "CafeVibes", "AestheticEats", "TheFlauxMedia"]
+      },
+      {
+        "title": "Madhuram Cafe",
+        "link": "https://youtube.com/shorts/FbJeturfEe4?si=GJHzv_Ya99UNZJTZ",
+        "description": "The client wanted to make their café look premium yet approachable. Our concept revolved around warm tones, real customer reactions, and organic movements that pull viewers in.",
+        "format": "portrait",
+        "tags": ["RestaurantShorts", "VisualStorytelling", "TheFlauxMedia"]
+      },
+      {
+        "title": "Madhuram Cafe (Cinematic Edit)",
+        "link": "https://youtube.com/shorts/sgh4J-cwiOE?si=_XXEI2wKgTfi5boa",
+        "description": "The goal was simple — capture the heart of the restaurant through food. We showcased their most loved dishes in a cinematic flow that blends flavor, mood, and rhythm. Aesthetics meet appetite.",
+        "format": "portrait",
+        "tags": ["FoodieMood", "VisualFlavors", "CreativeAgency", "TheFlauxMedia"]
+      }
+  ],
+   "creatives": [
+    {
+      "title": "The Classic Cosmo",
+      "image": "/creatives/01.webp",
+      "description": "A timeless classic. Experience the perfect blend of vodka, triple sec, and cranberry for a sweet, tangy, and irresistibly classy cocktail."
+    },
+    {
+      "title": "Ready to Sip: Honey Dew",
+      "image": "/creatives/02.webp",
+      "description": "A refreshing blend of tropical and floral notes, perfectly balanced with the sweetness of fresh fruit. This is a delightful escape in a glass."
+    },
+    {
+      "title": "Where Honey Meets Heat",
+      "image": "/creatives/03.webp",
+      "description": "Indulge in our Honey Chilli Potato, where crispy fries are tossed in a sweet and spicy sauce for the perfect flavour explosion."
+    },
+    {
+      "title": "Taste the Rainbow",
+      "image": "/creatives/04.webp",
+      "description": "A dazzling layered cocktail that's a true tropical sunset. Its vibrant colors and sweet, tangy notes make for a treat that delights all the senses."
+    },
+    {
+      "title": "The Crowd's Favourite: Caramel Cheesecake",
+      "image": "/creatives/05.webp",
+      "description": "Indulge in pure decadence. Our rich, creamy cheesecake with a luscious caramel topping is the sweet ending everyone is talking about."
+    },
+    {
+      "title": "Classic Kadai Paneer",
+      "image": "/creatives/06.webp",
+      "description": "Dive into a rich, creamy, and delicious curry featuring soft, fresh paneer and freshly ground kadai masala. A North Indian classic you simply can't resist."
+    },
+    {
+      "title": "A Slice of Veggie Delight",
+      "image": "/creatives/07.webp",
+      "description": "Fresh veggies, melty cheese, and a perfect crisp crust. Honest flavors, made to satisfy your pizza cravings. It's simply delicious."
+    },
+    {
+      "title": "The Sizzler Experience",
+      "image": "/creatives/08.webp",
+      "description": "It's more than a meal, it's an experience. Enjoy a hot sizzler loaded with fresh vegetables and our signature savory sauce, perfectly complemented by a tangy Kairi Cooler."
+    },
+    {
+      "title": "This Week's Special: Coastal Prawn Fry",
+      "image": "/creatives/09.webp",
+      "description": "Experience a coastal classic with our authentic Prawn Fry, rich with traditional spices. Served with fluffy neer dosas, it's a combination you won't want to miss."
+    },
+    {
+      "title": "Smoky Paneer Tikka",
+      "image": "/creatives/10.webp",
+      "description": "Perfectly grilled and bursting with flavor. Enjoy tender paneer marinated in a perfect blend of smoky spices. A classic appetizer that never disappoints."
+    }
+  ]
+}

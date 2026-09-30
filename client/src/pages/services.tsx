@@ -1,128 +1,153 @@
-import { ArrowLeft, Code, Palette, Megaphone, BarChart3, Globe, Smartphone, Search, Users } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import {
+  Film,
+  Camera,
+  PlayCircle,
+  Image,
+  Scissors,
+  Target,
+  Users,
+  Megaphone,
+  PenTool,
+  Globe,
+  TrendingUp,
+  Search,
+} from "lucide-react";
 import { Link } from "wouter";
+import { motion } from "framer-motion";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
+import FooterStrip from "@/components/footer-strip";
+
+type ServiceItem = { icon: keyof typeof iconMap; title: string; desc: string };
+type ServicesData = Record<string, ServiceItem[]>;
+
+const iconMap = {
+  film: Film,
+  camera: Camera,
+  "play-circle": PlayCircle,
+  image: Image,
+  scissors: Scissors,
+  target: Target,
+  users: Users,
+  megaphone: Megaphone,
+  "pen-tool": PenTool,
+  globe: Globe,
+  "trending-up": TrendingUp,
+  search: Search,
+};
+
+const SERVICES_DATA: ServicesData = {
+  "Content Creation & Media Production": [
+    { icon: "film", title: "Brand Films & Ad Videos", desc: "We craft cinematic visuals that tell stories, build emotion, and strengthen brand recall." },
+    { icon: "camera", title: "Product & Campaign Shoots", desc: "From concept to camera, we capture visuals that drive engagement and conversions." },
+    { icon: "play-circle", title: "Social Media Videos", desc: "Thumb-stopping short-form content designed for modern platforms." },
+    { icon: "image", title: "Photography & Creatives", desc: "Premium visuals and graphics that make every scroll count." },
+    { icon: "scissors", title: "Post-Production & Editing", desc: "Seamless edits, sharp color grading, and sound design that elevate your content." },
+  ],
+  "Strategy & Media Marketing": [
+    { icon: "target", title: "Content Strategy", desc: "Data-backed storytelling designed to connect and convert." },
+    { icon: "users", title: "Social Media Management", desc: "Consistent, creative brand presence that builds community and trust." },
+    { icon: "megaphone", title: "Ad Campaigns", desc: "High-impact visuals built to convert on Meta, Google, and YouTube." },
+    { icon: "pen-tool", title: "Brand Identity Design", desc: "Defining your brand’s visual DNA — logo, fonts, colors, and tone." },
+  ],
+  "Digital Growth & Technology": [
+    { icon: "globe", title: "Web Development", desc: "Custom, fast, and SEO-optimized websites designed for impact." },
+    { icon: "trending-up", title: "Digital Marketing", desc: "Strategic campaigns that amplify reach and generate real results." },
+    { icon: "search", title: "SEO Optimization", desc: "Boost visibility with performance-driven SEO that ranks and converts." },
+  ],
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+};
 
 export default function Services() {
-  const services = [
-    {
-      icon: Palette,
-      title: "Brand Identity & Design",
-      description: "Complete brand development from logo design to brand guidelines, creating cohesive visual identities that resonate with your target audience.",
-      features: ["Logo Design", "Brand Guidelines", "Color Palette", "Typography", "Business Cards", "Stationery"]
-    },
-    {
-      icon: Code,
-      title: "Web Development",
-      description: "Custom websites and web applications built with modern technologies, optimized for performance, SEO, and user experience.",
-      features: ["React/Next.js", "E-commerce", "CMS Integration", "API Development", "Mobile Responsive", "SEO Optimization"]
-    },
-    {
-      icon: Megaphone,
-      title: "Digital Marketing",
-      description: "Strategic marketing campaigns across all digital channels to increase brand awareness and drive conversions.",
-      features: ["Social Media Marketing", "Content Strategy", "Email Marketing", "PPC Advertising", "Influencer Marketing", "Analytics"]
-    },
-    {
-      icon: BarChart3,
-      title: "Analytics & Strategy",
-      description: "Data-driven insights and strategic planning to optimize your digital presence and maximize ROI.",
-      features: ["Performance Analytics", "User Behavior Analysis", "A/B Testing", "Conversion Optimization", "Market Research", "Growth Strategy"]
-    },
-    {
-      icon: Globe,
-      title: "Content Creation",
-      description: "Engaging content that tells your brand story and connects with your audience across all platforms.",
-      features: ["Copywriting", "Video Production", "Photography", "Graphic Design", "Social Media Content", "Blog Writing"]
-    },
-    {
-      icon: Smartphone,
-      title: "Mobile App Development",
-      description: "Native and cross-platform mobile applications that deliver exceptional user experiences.",
-      features: ["iOS Development", "Android Development", "React Native", "Flutter", "UI/UX Design", "App Store Optimization"]
-    },
-    {
-      icon: Search,
-      title: "SEO & SEM",
-      description: "Search engine optimization and marketing to improve your online visibility and drive organic traffic.",
-      features: ["Keyword Research", "On-page SEO", "Technical SEO", "Link Building", "Google Ads", "Local SEO"]
-    },
-    {
-      icon: Users,
-      title: "Consulting & Training",
-      description: "Expert guidance and training to help your team succeed in the digital landscape.",
-      features: ["Digital Strategy", "Team Training", "Workshops", "Audit Services", "Process Optimization", "Technology Consultation"]
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-[var(--flaux-black)] text-[var(--flaux-white)]">
+    <div className="relative">
+      <Footer />
+      <div className="relative z-10 min-h-screen bg-[var(--flaux-black)] text-[var(--flaux-white)] rounded-b-[80px] md:rounded-b-[150px] mb-[100vh] shadow-[0_40px_80px_rgba(0,0,0,0.45)]">
+      <Navbar />
       {/* Header */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Link href="/" className="inline-flex items-center text-[var(--flaux-orange)] hover:text-white transition-colors duration-300 mb-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-24">
+        {/* <Link href="/" className="inline-flex items-center text-[var(--flaux-orange)] hover:text-white transition-colors duration-300 mb-8">
           <ArrowLeft size={20} className="mr-2" />
           Back to Home
-        </Link>
-        
+        </Link> */}
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-8 leading-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-6 leading-tight">
             Our <span className="gradient-text">Services</span>
           </h1>
-          
-          <p className="text-xl sm:text-2xl text-gray-400 mb-12 leading-relaxed">
-            Comprehensive digital solutions designed to transform your business and accelerate growth.
+          <p className="text-base sm:text-lg md:text-xl text-gray-400 leading-relaxed">
+            A refined, minimal stack of offerings — crafted for ambitious brands.
           </p>
         </div>
       </div>
 
-      {/* Services Grid */}
-      <section className="py-16 sm:py-20 lg:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <div key={service.title} className="bg-[var(--flaux-gray)] rounded-xl p-8 border border-[var(--flaux-light-gray)] hover:border-[var(--flaux-orange)] transition-all duration-300 hover:transform hover:scale-105">
-                <div className="w-16 h-16 bg-[var(--flaux-orange)] rounded-full flex items-center justify-center mb-6">
-                  <service.icon size={32} className="text-white" />
-                </div>
-                <h3 className="text-xl font-bold mb-4">{service.title}</h3>
-                <p className="text-gray-400 mb-6">{service.description}</p>
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-[var(--flaux-orange)] mb-3">What's Included:</h4>
-                  <ul className="space-y-1">
-                    {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="text-sm text-gray-400 flex items-center">
-                        <span className="w-2 h-2 bg-[var(--flaux-orange)] rounded-full mr-3"></span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Services - Minimal Vertical/Staggered Layout */}
+      <section className="pt-6 pb-16 sm:pt-10 sm:pb-20 lg:pt-12 lg:pb-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+          {Object.entries(SERVICES_DATA).map(([category, items], sectionIndex) => (
+            <div key={category} className={`mb-16 sm:mb-20 ${sectionIndex > 0 ? "pt-6 sm:pt-10 border-t border-white/5" : ""}`}>
+              {/* Category Heading */}
+              <motion.h2
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.5 }}
+                className="text-2xl sm:text-3xl md:text-4xl font-black mb-8 sm:mb-10 text-white"
+              >
+                {category}
+              </motion.h2>
 
-      {/* Process */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-[var(--flaux-gray)]">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-black mb-12 text-center">Our Process</h2>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              {[
-                { step: "01", title: "Discovery", description: "We start by understanding your business, goals, and challenges." },
-                { step: "02", title: "Strategy", description: "We develop a comprehensive strategy tailored to your needs." },
-                { step: "03", title: "Execution", description: "Our team brings the strategy to life with precision and creativity." },
-                { step: "04", title: "Optimization", description: "We continuously monitor and optimize for maximum impact." }
-              ].map((phase, index) => (
-                <div key={phase.step} className="text-center">
-                  <div className="w-16 h-16 bg-[var(--flaux-orange)] rounded-full flex items-center justify-center mx-auto mb-6">
-                    <span className="text-xl font-black text-white">{phase.step}</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-4">{phase.title}</h3>
-                  <p className="text-gray-400">{phase.description}</p>
-                </div>
-              ))}
+              {/* Items list */}
+              <motion.ul
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-10%" }}
+                className="space-y-6 sm:space-y-7"
+              >
+                {items.map((svc, idx) => {
+                  const Icon = iconMap[svc.icon];
+                  return (
+                    <motion.li
+                      key={svc.title}
+                      variants={itemVariants}
+                      className="group relative flex items-start gap-4 sm:gap-6"
+                    >
+                      {/* Accent rail */}
+                      <div className="absolute left-[1.25rem] sm:left-[1.5rem] top-0 bottom-0 w-px bg-gradient-to-b from-orange-500/40 via-orange-500/10 to-transparent pointer-events-none" />
+
+                      {/* Icon */}
+                      <div className="relative z-10 mt-1 sm:mt-1.5 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[var(--flaux-orange)] group-hover:bg-white/10 transition-colors">
+                        <Icon size={18} className="sm:w-[22px] sm:h-[22px]" />
+                      </div>
+
+                      {/* Text */}
+                      <div className="flex-1 pl-2">
+                        <h3 className="text-base sm:text-lg md:text-xl font-semibold text-white tracking-tight group-hover:text-orange-400 transition-colors">
+                          {svc.title}
+                        </h3>
+                        <p className="text-gray-400 text-sm sm:text-base leading-relaxed mt-2">
+                          {svc.desc}
+                        </p>
+                      </div>
+                    </motion.li>
+                  );
+                })}
+              </motion.ul>
             </div>
-          </div>
+          ))}
         </div>
       </section>
 
@@ -130,21 +155,16 @@ export default function Services() {
       <section className="py-16 sm:py-20 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl sm:text-4xl font-black mb-8">Ready to Get Started?</h2>
-            <p className="text-xl text-gray-400 mb-12">
-              Let's discuss how we can help transform your business with our comprehensive digital solutions.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="bg-[var(--flaux-orange)] text-white px-8 py-4 rounded-full hover:bg-orange-600 transition-colors duration-300 font-medium">
-                Get a Quote
-              </Link>
-              <Link href="/contact" className="border border-[var(--flaux-orange)] text-[var(--flaux-orange)] px-8 py-4 rounded-full hover:bg-[var(--flaux-orange)] hover:text-white transition-colors duration-300 font-medium">
-                Schedule a Call
-              </Link>
-            </div>
+            <h2 className="text-3xl sm:text-4xl font-black mb-6">Have a project in mind?</h2>
+            <p className="text-lg text-gray-400 mb-10">Let's build something bold, creative, and performance-driven.</p>
+            <Link href="/contact" className="inline-flex items-center gap-3 bg-[var(--flaux-orange)] text-white px-8 py-4 rounded-full hover:bg-orange-600 transition-colors duration-300 font-semibold">
+              Get in touch
+            </Link>
           </div>
         </div>
       </section>
+      <FooterStrip />
+      </div>
     </div>
   );
 }

@@ -66,6 +66,13 @@
     font-family: 'Inter', sans-serif;
   }
 
+  /* Prevent background scroll when modals are open */
+  body.modal-open {
+    overflow: hidden;
+    overscroll-behavior: contain;
+    touch-action: none;
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -94,7 +101,7 @@
 
   .marquee-content {
     display: inline-block;
-    animation: marquee 35s linear infinite;
+    animation: marquee 55s linear infinite; /* slowed down */
   }
 
   .section-animate {
@@ -115,6 +122,25 @@
   .card-hover:hover {
     transform: translateY(-5px) scale(1.02);
   }
+  /* === Reveal  Animation Fixes === */
+
+  .footer-takeover {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    height: 100vh;
+    max-height: 100dvh;
+    overflow: hidden;
+  }
+
+.section-animate {
+  content-visibility: auto;
+  contain-intrinsic-size: 500px;
+}
 
   .navbar-transition {
     transition: all 0.3s ease;
@@ -140,8 +166,8 @@
   }
 
   .footer-takeover {
-    background: linear-gradient(135deg, var(--flaux-black) 0%, var(--flaux-gray) 100%);
-    backdrop-filter: blur(20px);
+    background: radial-gradient(ellipse at center, hsl(0, 0%, 12%) 0%, var(--flaux-black) 70%);
+    backdrop-filter: none;
   }
 
   .footer-takeover-text {
@@ -196,6 +222,10 @@
 @keyframes marquee {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
 }
 
 @keyframes fadeInUp {

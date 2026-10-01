@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
 import { Eyebrow, Headline, Reveal } from "@/components/motion";
 import ReelCard from "@/components/reel-card";
+import CaseCards from "@/components/case-cards";
 import VideoLightbox from "@/components/video-lightbox";
 import { useWorks } from "@/lib/works";
 
@@ -73,6 +74,11 @@ export default function SelectedWork() {
               ))}
         </div>
       </Reveal>
+
+      <div className="mx-auto mt-20 max-w-[1400px] px-5 sm:px-8 lg:px-12">
+        <h3 className="eyebrow mb-8">Featured case studies</h3>
+        <CaseCards slugs={["stories-bar-and-kitchen", "madhuram-cafe", "macaw-restaurant-reel"]} />
+      </div>
 
       <VideoLightbox videos={shown} index={openIndex} onChange={setOpenIndex} />
     </section>

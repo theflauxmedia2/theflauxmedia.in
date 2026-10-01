@@ -13,14 +13,16 @@ import {
   TrendingUp,
   Search,
 } from "lucide-react";
+import { Link } from "wouter";
 import PageShell from "@/components/page-shell";
+import { servicePath } from "@/content/services";
 import PageHeader from "@/components/page-header";
 import { getRoute } from "@/seo/routes";
 import Contact from "@/components/contact";
 import { EASE_OUT, Reveal } from "@/components/motion";
 import { creative } from "@/lib/works";
 
-type ServiceItem = { icon: keyof typeof iconMap; title: string; desc: string };
+type ServiceItem = { icon: keyof typeof iconMap; title: string; desc: string; page: string };
 
 const iconMap = {
   film: Film,
@@ -43,11 +45,11 @@ const SERVICES_DATA: { category: string; blurb: string; image: ReturnType<typeof
     blurb: "From concept to camera to cut — everything you need to show up beautifully.",
     image: creative("sizzler-kairi-cooler-poster-stories-nagarbhavi"),
     items: [
-      { icon: "film", title: "Brand Films & Ad Videos", desc: "We craft cinematic visuals that tell stories, build emotion, and strengthen brand recall." },
-      { icon: "camera", title: "Product & Campaign Shoots", desc: "From concept to camera, we capture visuals that drive engagement and conversions." },
-      { icon: "play-circle", title: "Social Media Videos", desc: "Thumb-stopping short-form content designed for modern platforms." },
-      { icon: "image", title: "Photography & Creatives", desc: "Premium visuals and graphics that make every scroll count." },
-      { icon: "scissors", title: "Post-Production & Editing", desc: "Seamless edits, sharp color grading, and sound design that elevate your content." },
+      { icon: "film", title: "Brand Films & Ad Videos", desc: "We craft cinematic visuals that tell stories, build emotion, and strengthen brand recall.", page: "video-production-bangalore" },
+      { icon: "camera", title: "Product & Campaign Shoots", desc: "From concept to camera, we capture visuals that drive engagement and conversions.", page: "video-production-bangalore" },
+      { icon: "play-circle", title: "Social Media Videos", desc: "Thumb-stopping short-form content designed for modern platforms.", page: "instagram-reels-production-bangalore" },
+      { icon: "image", title: "Photography & Creatives", desc: "Premium visuals and graphics that make every scroll count.", page: "social-media-poster-design-bangalore" },
+      { icon: "scissors", title: "Post-Production & Editing", desc: "Seamless edits, sharp color grading, and sound design that elevate your content.", page: "video-production-bangalore" },
     ],
   },
   {
@@ -55,10 +57,10 @@ const SERVICES_DATA: { category: string; blurb: string; image: ReturnType<typeof
     blurb: "The thinking behind the content — so every post has a reason to exist.",
     image: creative("honey-dew-mocktail-poster-stories-rajajinagar"),
     items: [
-      { icon: "target", title: "Content Strategy", desc: "Data-backed storytelling designed to connect and convert." },
-      { icon: "users", title: "Social Media Management", desc: "Consistent, creative brand presence that builds community and trust." },
-      { icon: "megaphone", title: "Ad Campaigns", desc: "High-impact visuals built to convert on Meta, Google, and YouTube." },
-      { icon: "pen-tool", title: "Brand Identity Design", desc: "Defining your brand's visual DNA — logo, fonts, colors, and tone." },
+      { icon: "target", title: "Content Strategy", desc: "Data-backed storytelling designed to connect and convert.", page: "social-media-marketing-bangalore" },
+      { icon: "users", title: "Social Media Management", desc: "Consistent, creative brand presence that builds community and trust.", page: "social-media-marketing-bangalore" },
+      { icon: "megaphone", title: "Ad Campaigns", desc: "High-impact visuals built to convert on Meta, Google, and YouTube.", page: "performance-marketing-bangalore" },
+      { icon: "pen-tool", title: "Brand Identity Design", desc: "Defining your brand's visual DNA — logo, fonts, colors, and tone.", page: "branding-agency-bangalore" },
     ],
   },
   {
@@ -66,9 +68,9 @@ const SERVICES_DATA: { category: string; blurb: string; image: ReturnType<typeof
     blurb: "15+ websites shipped — many for top F&B brands in Bengaluru, and ranking on Google. Built to turn attention into enquiries.",
     image: creative("rainbow-layered-cocktail-poster-stories-rajajinagar"),
     items: [
-      { icon: "globe", title: "Web Development", desc: "Custom, fast, SEO-optimized websites designed and built in-house — from restaurant sites to full brand experiences." },
-      { icon: "trending-up", title: "Digital Marketing", desc: "Strategic campaigns that amplify reach and generate real results." },
-      { icon: "search", title: "SEO Optimization", desc: "Boost visibility with performance-driven SEO that ranks and converts." },
+      { icon: "globe", title: "Web Development", desc: "Custom, fast, SEO-optimized websites designed and built in-house — from restaurant sites to full brand experiences.", page: "website-design-development-bangalore" },
+      { icon: "trending-up", title: "Digital Marketing", desc: "Strategic campaigns that amplify reach and generate real results.", page: "performance-marketing-bangalore" },
+      { icon: "search", title: "SEO Optimization", desc: "Boost visibility with performance-driven SEO that ranks and converts.", page: "website-design-development-bangalore" },
     ],
   },
 ];
@@ -79,7 +81,16 @@ export default function Services() {
       <PageHeader
         h1={getRoute("/services").h1}
         lines={["Made to be", <span className="accent">noticed.</span>]}
-        intro="A focused stack of offerings for ambitious brands — production, strategy and technology under one roof."
+        intro={
+          <>
+            Reels, posters, video production, social media and performance marketing, websites and branding — from one
+            team in South Bengaluru. Running a restaurant, café or bar? See our{" "}
+            <Link href="/restaurant-marketing-bangalore" className="link-underline text-bone">
+              restaurant marketing in Bengaluru
+            </Link>
+            .
+          </>
+        }
       />
 
       <div className="mx-auto max-w-[1400px] px-5 pb-12 sm:px-8 lg:px-12">
@@ -114,7 +125,11 @@ export default function Services() {
                       <Icon size={20} />
                     </span>
                     <div>
-                      <h3 className="headline text-3xl text-bone sm:text-4xl">{svc.title}</h3>
+                      <h3 className="headline text-3xl text-bone sm:text-4xl">
+                        <Link href={servicePath(svc.page)} className="link-underline hover:text-flame">
+                          {svc.title}
+                        </Link>
+                      </h3>
                       <p className="mt-3 max-w-lg leading-relaxed text-mute">{svc.desc}</p>
                     </div>
                   </motion.li>

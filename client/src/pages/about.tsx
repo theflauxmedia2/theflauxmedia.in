@@ -7,6 +7,8 @@ import BrandMarquee from "@/components/brand-marquee";
 import Contact from "@/components/contact";
 import { EASE_OUT, Eyebrow, Headline, Reveal } from "@/components/motion";
 import { creative } from "@/lib/works";
+import { Link } from "wouter";
+import { CONTACT, FOUNDER, FOUNDING_YEAR } from "@/lib/site";
 
 const VALUES = [
   {
@@ -39,7 +41,7 @@ export default function About() {
       <PageHeader
         h1={getRoute("/about").h1}
         lines={["Built for", <>the <span className="accent">scroll.</span></>]}
-        intro="The Flaux Media is a creative media and marketing studio in Bengaluru. We help brands stand out through high-quality visuals, strategy-driven campaigns and technology-led execution."
+        intro="The Flaux Media is a creative media and marketing studio based on Bannerghatta Road in South Bengaluru. We help restaurants, cafés and growing brands stand out with reels, posters, brand films, websites and campaigns."
       />
 
       {/* Story */}
@@ -80,6 +82,47 @@ export default function About() {
               </div>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      {/* Founder + base */}
+      <section className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 border-t border-line px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-12 lg:px-12">
+        <div className="lg:col-span-5">
+          <Eyebrow className="mb-6">Who we are</Eyebrow>
+          {/* TODO(owner): add a founder photo (and a real bio paragraph) here. */}
+          <h2 className="headline text-5xl text-bone sm:text-6xl">
+            Founded in {FOUNDING_YEAR} by <span className="accent">{FOUNDER}.</span>
+          </h2>
+        </div>
+        <div className="space-y-10 lg:col-span-7">
+          <div>
+            <h3 className="headline text-3xl text-bone">Where we're based</h3>
+            <p className="mt-3 max-w-2xl text-lg leading-relaxed text-mute">
+              The team works out of {CONTACT.location}, in South Bengaluru — a short drive from Hulimavu, Arekere,
+              JP Nagar, Jayanagar, BTM Layout, Banashankari and Kanakapura Road. We shoot across the whole city too:
+              our restaurant work so far spans outlets in Rajajinagar and Nagarbhavi.{" "}
+              <Link href="/areas/south-bengaluru" className="link-underline text-bone">
+                See the areas we cover
+              </Link>
+              .
+            </p>
+          </div>
+          <div>
+            <h3 className="headline text-3xl text-bone">How shoots work</h3>
+            <p className="mt-3 max-w-2xl text-lg leading-relaxed text-mute">
+              We shoot on location — at your restaurant, café, bar, store or event — so the content shows the real
+              place your customers will walk into. Before the shoot we agree the concept, shot list and the dishes,
+              drinks or products to feature; afterwards we edit, colour-grade and deliver files sized for Instagram
+              Reels, Stories, YouTube Shorts and your feed.
+            </p>
+          </div>
+          <div>
+            <h3 className="headline text-3xl text-bone">Everything in-house</h3>
+            <p className="mt-3 max-w-2xl text-lg leading-relaxed text-mute">
+              Concept, camera, editing, poster design, social media management, ads and websites are all handled by
+              our own team — so the reel, the poster and the website all look like they came from the same brand.
+            </p>
+          </div>
         </div>
       </section>
 

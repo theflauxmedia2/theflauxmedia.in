@@ -1,5 +1,7 @@
 import Lightbox from "@/components/lightbox";
-import { clientName, videoEmbedUrl, type VideoItem } from "@/lib/works";
+import { Link } from "wouter";
+import { casePath } from "@/content/cases";
+import { cleanDescription, clientName, videoEmbedUrl, type VideoItem } from "@/lib/works";
 
 type VideoLightboxProps = {
   videos: VideoItem[];
@@ -22,7 +24,10 @@ export default function VideoLightbox({ videos, index, onChange }: VideoLightbox
         video && (
           <>
             <p className="headline text-2xl text-bone">{clientName(video.title)}</p>
-            <p className="mx-auto mt-2 line-clamp-2 max-w-xl text-sm text-mute">{video.description}</p>
+            <p className="mx-auto mt-2 line-clamp-2 max-w-xl text-sm text-mute">{cleanDescription(video.description)}</p>
+            <Link href={casePath(video.case)} className="link-underline mt-3 inline-block text-sm text-bone">
+              View the {clientName(video.title)} case study →
+            </Link>
           </>
         )
       }

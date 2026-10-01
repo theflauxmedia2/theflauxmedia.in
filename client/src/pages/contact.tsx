@@ -6,7 +6,8 @@ import PageShell from "@/components/page-shell";
 import PageHeader from "@/components/page-header";
 import { getRoute } from "@/seo/routes";
 import { EASE_OUT, Eyebrow, Headline, Reveal } from "@/components/motion";
-import { CONTACT } from "@/lib/site";
+import { CONTACT, SERVICE_AREAS, SITE_NAME } from "@/lib/site";
+import { Link } from "wouter";
 import { CONTACT_FAQS } from "@/content/contact";
 
 const NEEDS = ["Reels & short-form", "Brand film", "Photography", "Social media", "Branding & design", "Website", "Ads & growth"];
@@ -155,6 +156,29 @@ export default function Contact() {
             </div>
           </form>
         </motion.div>
+      </section>
+
+      {/* Service area */}
+      <section className="border-t border-line py-20 sm:py-24">
+        <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-10 px-5 sm:px-8 lg:grid-cols-12 lg:px-12">
+          <div className="lg:col-span-4">
+            <Eyebrow className="mb-6">Where we work</Eyebrow>
+            <h2 className="headline text-5xl text-bone sm:text-6xl">
+              South Bengaluru <span className="accent">& beyond.</span>
+            </h2>
+          </div>
+          <div className="lg:col-span-8">
+            <p className="max-w-2xl text-lg leading-relaxed text-mute">
+              {SITE_NAME} is based on {CONTACT.location}. We come to you for shoots — restaurants, cafés, bars,
+              stores and events — across {SERVICE_AREAS.slice(0, -1).join(", ")} and {SERVICE_AREAS[SERVICE_AREAS.length - 1]}, and
+              anywhere else in Bengaluru.
+            </p>
+            <Link href="/areas/south-bengaluru" className="btn btn-ghost group mt-8">
+              Areas we serve
+              <ArrowUpRight size={16} className="btn-arrow" />
+            </Link>
+          </div>
+        </div>
       </section>
 
       {/* FAQ */}

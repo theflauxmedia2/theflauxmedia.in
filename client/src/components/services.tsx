@@ -10,28 +10,28 @@ const SERVICES = [
     description: "Visual storytelling that captivates your audience and strengthens your brand presence across every platform.",
     tags: ["Brand identity", "Social creatives", "Menus & print"],
     image: creative("rainbow-layered-cocktail-poster-stories-rajajinagar"),
-    href: "/services",
+    href: "/services/social-media-poster-design-bangalore",
   },
   {
     title: "Social Media Marketing",
     description: "Strategy, content calendars and community management that position you uniquely and connect deeply with your audience.",
     tags: ["Strategy", "Content calendars", "Ad campaigns"],
     image: creative("honey-dew-mocktail-poster-stories-rajajinagar"),
-    href: "/services",
+    href: "/services/social-media-marketing-bangalore",
   },
   {
     title: "Film & Photography",
     description: "Cinematic reels, brand films and product shoots that elevate your brand's voice and hold attention.",
     tags: ["Reels", "Brand films", "Product shoots"],
     image: creative("sizzler-kairi-cooler-poster-stories-nagarbhavi"),
-    href: "/services",
+    href: "/services/video-production-bangalore",
   },
   {
     title: "Web Development",
     description: "Fast, search-ready websites built in-house — 15+ shipped so far, many for top F&B brands in Bengaluru and ranking on Google.",
     tags: ["Websites", "SEO", "Landing pages"],
     image: null,
-    href: "/services",
+    href: "/services/website-design-development-bangalore",
   },
 ];
 
@@ -108,6 +108,26 @@ export default function Services() {
           })}
         </ol>
       </div>
+      <Reveal className="mx-auto mt-12 max-w-[1400px] px-5 sm:px-8 lg:px-12">
+        <p className="text-mute lg:ml-[calc(41.666%+0.5rem)]">
+          Also:{" "}
+          <Link href="/services/instagram-reels-production-bangalore" className="link-underline text-bone">
+            Instagram reel production
+          </Link>
+          {" · "}
+          <Link href="/services/performance-marketing-bangalore" className="link-underline text-bone">
+            Meta &amp; Google ads
+          </Link>
+          {" · "}
+          <Link href="/services/branding-agency-bangalore" className="link-underline text-bone">
+            Branding &amp; logo design
+          </Link>
+          {" · "}
+          <Link href="/restaurant-marketing-bangalore" className="link-underline text-bone">
+            Restaurant &amp; café marketing
+          </Link>
+        </p>
+      </Reveal>
     </section>
   );
 }

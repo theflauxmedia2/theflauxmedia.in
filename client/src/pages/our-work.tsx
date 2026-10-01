@@ -8,6 +8,8 @@ import ReelCard from "@/components/reel-card";
 import VideoLightbox from "@/components/video-lightbox";
 import Lightbox from "@/components/lightbox";
 import Contact from "@/components/contact";
+import CaseCards from "@/components/case-cards";
+import { CASE_STUDIES } from "@/content/cases";
 import { EASE_OUT } from "@/components/motion";
 import { clientName, useWorks } from "@/lib/works";
 
@@ -135,6 +137,13 @@ export default function OurWork() {
             ))}
           </div>
         )}
+      </section>
+
+      <section className="border-t border-line py-20 sm:py-24">
+        <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+          <h2 className="eyebrow mb-8">Case studies by client</h2>
+          <CaseCards slugs={CASE_STUDIES.map((c) => c.slug)} />
+        </div>
       </section>
 
       <Contact />

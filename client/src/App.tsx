@@ -14,6 +14,11 @@ import Contact from "@/pages/contact";
 import NotFound from "@/pages/not-found";
 import Packages from "@/pages/packages";
 import OurWork from "@/pages/our-work";
+import ServiceDetail from "@/pages/service-detail";
+import CaseStudy from "@/pages/case-study";
+import Area from "@/pages/area";
+import RestaurantMarketing from "@/pages/restaurant-marketing";
+import { BlogIndex, BlogPostPage } from "@/pages/blog";
 
 function Router() {
   return (
@@ -21,6 +26,12 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/services" component={Services} />
+      <Route path="/services/:slug" component={ServiceDetail} />
+      <Route path="/restaurant-marketing-bangalore" component={RestaurantMarketing} />
+      <Route path="/work/:slug" component={CaseStudy} />
+      <Route path="/areas/:slug" component={Area} />
+      <Route path="/blog" component={BlogIndex} />
+      <Route path="/blog/:slug" component={BlogPostPage} />
       {/* No real team page yet — send visitors to About */}
       <Route path="/team">
         <Redirect to="/about" replace />

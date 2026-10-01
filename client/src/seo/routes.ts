@@ -1,5 +1,21 @@
-import { WORKS } from "@/lib/works";
-import { breadcrumbList, faqPage, webPage, type Crumb, type JsonLd } from "@/seo/schema";
+import { WORKS, cleanDescription } from "@/lib/works";
+import {
+  articleSchema,
+  blogSchema,
+  breadcrumbList,
+  creativeWork,
+  faqPage,
+  serviceSchema,
+  videoObject,
+  webPage,
+  type Crumb,
+  type JsonLd,
+} from "@/seo/schema";
+import { SERVICE_PAGES, servicePath } from "@/content/services";
+import { CASE_STUDIES, casePath } from "@/content/cases";
+import { AREA_PAGES, areaPath } from "@/content/areas";
+import { BLOG_POSTS, blogPath } from "@/content/blog";
+import { RESTAURANT_PAGE } from "@/content/industry";
 import { PACKAGE_FAQS } from "@/content/packages";
 import { CONTACT_FAQS } from "@/content/contact";
 
@@ -102,7 +118,135 @@ export const NOT_FOUND: RouteMeta = {
   noindex: true,
 };
 
-export const ROUTES: RouteMeta[] = [...core];
+const services: RouteMeta[] = SERVICE_PAGES.map((svc) => ({
+  path: servicePath(svc.slug),
+  title: svc.title,
+  description: svc.description,
+  h1: svc.h1,
+  breadcrumbs: [
+    { name: "Services", path: "/services" },
+    { name: svc.name, path: servicePath(svc.slug) },
+  ],
+  sitemap: { priority: 0.8, changefreq: "monthly" },
+  lastmod: UPDATED,
+  jsonLd: [
+    serviceSchema({ path: servicePath(svc.slug), name: svc.h1, serviceType: svc.serviceType, description: svc.description }),
+    faqPage(svc.faqs),
+  ],
+}));
+
+const restaurant: RouteMeta = {
+  path: RESTAURANT_PAGE.path,
+  title: RESTAURANT_PAGE.title,
+  description: RESTAURANT_PAGE.description,
+  h1: RESTAURANT_PAGE.h1,
+  breadcrumbs: [{ name: RESTAURANT_PAGE.name, path: RESTAURANT_PAGE.path }],
+  sitemap: { priority: 0.9, changefreq: "monthly" },
+  lastmod: UPDATED,
+  images: portfolioImages,
+  jsonLd: [
+    serviceSchema({
+      path: RESTAURANT_PAGE.path,
+      name: RESTAURANT_PAGE.h1,
+      serviceType: "Restaurant social media marketing",
+      description: RESTAURANT_PAGE.description,
+    }),
+    faqPage(RESTAURANT_PAGE.faqs),
+  ],
+};
+
+const cases: RouteMeta[] = CASE_STUDIES.map((cs) => {
+  const path = casePath(cs.slug);
+  const videos = WORKS.videos.filter((v) => v.case === cs.slug);
+  const creatives = WORKS.creatives.filter((c) => c.case === cs.slug);
+  const videoBlocks = videos.map((v) => videoObject(v, `${v.title} — reel by The Flaux Media`, cleanDescription(v.description)));
+  return {
+    path,
+    title: cs.title,
+    description: cs.description,
+    h1: cs.h1,
+    breadcrumbs: [
+      { name: "Our Work", path: "/our-work" },
+      { name: cs.client, path },
+    ],
+    sitemap: { priority: 0.7, changefreq: "monthly" },
+    lastmod: UPDATED,
+    images: creatives.map((c) => ({ loc: c.image, title: c.title, caption: c.alt })),
+    jsonLd: [
+      creativeWork({
+        path,
+        name: cs.h1,
+        description: cs.description,
+        client: cs.client,
+        images: creatives.map((c) => c.image),
+        videos: videoBlocks,
+      }),
+    ],
+  };
+});
+
+const areas: RouteMeta[] = AREA_PAGES.map((area) => ({
+  path: areaPath(area.slug),
+  title: area.title,
+  description: area.description,
+  h1: area.h1,
+  breadcrumbs:
+    area.slug === "south-bengaluru"
+      ? [{ name: area.name, path: areaPath(area.slug) }]
+      : [
+          { name: "South Bengaluru", path: areaPath("south-bengaluru") },
+          { name: area.name, path: areaPath(area.slug) },
+        ],
+  sitemap: { priority: 0.7, changefreq: "monthly" },
+  lastmod: UPDATED,
+  jsonLd: [faqPage(area.faqs)],
+}));
+// Locality pages (JP Nagar, Jayanagar, …) get added here only once there's a real client or shoot to feature.
+
+const blog: RouteMeta[] = [
+  {
+    path: "/blog",
+    title: "Blog: Social Media & Restaurant Marketing Tips | The Flaux Media",
+    description:
+      "Guides on social media marketing costs, restaurant reel ideas and content that brings in customers — from a creative agency in South Bengaluru.",
+    h1: "Blog",
+    breadcrumbs: [{ name: "Blog", path: "/blog" }],
+    sitemap: { priority: 0.6, changefreq: "weekly" },
+    lastmod: UPDATED,
+    jsonLd: [
+      blogSchema(
+        "/blog",
+        BLOG_POSTS.map((p) => ({ path: blogPath(p.slug), headline: p.h1, datePublished: p.datePublished })),
+      ),
+    ],
+  },
+  ...BLOG_POSTS.map(
+    (post): RouteMeta => ({
+      path: blogPath(post.slug),
+      title: post.title,
+      description: post.description,
+      h1: post.h1,
+      breadcrumbs: [
+        { name: "Blog", path: "/blog" },
+        { name: post.h1, path: blogPath(post.slug) },
+      ],
+      sitemap: { priority: 0.6, changefreq: "monthly" },
+      lastmod: post.dateModified,
+      jsonLd: [
+        articleSchema({
+          path: blogPath(post.slug),
+          headline: post.h1,
+          description: post.description,
+          datePublished: post.datePublished,
+          dateModified: post.dateModified,
+          image: post.image,
+        }),
+      ],
+    }),
+  ),
+];
+
+export const ROUTES: RouteMeta[] = [...core, restaurant, ...services, ...cases, ...areas, ...blog];
 
 const byPath = new Map(ROUTES.map((r) => [r.path, r]));
 

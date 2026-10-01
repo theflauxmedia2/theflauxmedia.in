@@ -152,3 +152,42 @@ export function articleSchema(opts: {
     inLanguage: "en-IN",
   };
 }
+
+export function creativeWork(opts: {
+  path: string;
+  name: string;
+  description: string;
+  client: string;
+  images: string[];
+  videos: JsonLd[];
+}): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "@id": `${abs(opts.path)}#work`,
+    name: opts.name,
+    description: opts.description,
+    url: abs(opts.path),
+    creator: { "@id": ORG_ID },
+    sourceOrganization: { "@type": "Organization", name: opts.client },
+    image: opts.images.map(abs),
+    ...(opts.videos.length ? { video: opts.videos } : {}),
+  };
+}
+
+export function blogSchema(path: string, posts: { path: string; headline: string; datePublished: string }[]): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": `${abs(path)}#blog`,
+    url: abs(path),
+    name: "The Flaux Media blog",
+    publisher: { "@id": ORG_ID },
+    blogPost: posts.map((p) => ({
+      "@type": "BlogPosting",
+      headline: p.headline,
+      url: abs(p.path),
+      datePublished: p.datePublished,
+    })),
+  };
+}

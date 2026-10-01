@@ -156,123 +156,133 @@
   "creatives": [
     {
       "title": "The Classic Cosmo",
-      "image": "/creatives/lg/01.jpg",
+      "image": "/creatives/cosmo-cocktail-poster-stories-nagarbhavi.webp",
       "description": "A timeless classic. Experience the perfect blend of vodka, triple sec, and cranberry for a sweet, tangy, and irresistibly classy cocktail.",
-      "thumb": "/creatives/sm/01.jpg",
+      "thumb": "/creatives/cosmo-cocktail-poster-stories-nagarbhavi-540.webp",
       "slug": "cosmo-cocktail-poster-stories-nagarbhavi",
       "case": "stories-bar-and-kitchen",
       "outlet": "Nagarbhavi",
       "alt": "Red Cosmo cocktail with mint garnish in a cut-glass tumbler on a dark bar counter – cocktail poster for Stories Bar & Kitchen, Nagarbhavi",
-      "width": 640,
-      "height": 638
+      "width": 1080,
+      "height": 1077,
+      "source": "01.webp"
     },
     {
       "title": "Ready to Sip: Honey Dew",
-      "image": "/creatives/lg/02.jpg",
+      "image": "/creatives/honey-dew-mocktail-poster-stories-rajajinagar.webp",
       "description": "A refreshing blend of tropical and floral notes, perfectly balanced with the sweetness of fresh fruit. This is a delightful escape in a glass.",
-      "thumb": "/creatives/sm/02.jpg",
+      "thumb": "/creatives/honey-dew-mocktail-poster-stories-rajajinagar-540.webp",
       "slug": "honey-dew-mocktail-poster-stories-rajajinagar",
       "case": "stories-bar-and-kitchen",
       "outlet": "Rajajinagar",
       "alt": "Bartender in purple gloves garnishing a pink Honey Dew drink with pineapple and cherry – \"Ready to Sip\" poster for Stories Bar & Kitchen, Rajajinagar",
-      "width": 512,
-      "height": 640
+      "width": 1080,
+      "height": 1350,
+      "source": "02.webp"
     },
     {
       "title": "Where Honey Meets Heat",
-      "image": "/creatives/lg/03.jpg",
+      "image": "/creatives/honey-chilli-potato-poster-stories-rajajinagar.webp",
       "description": "Indulge in our Honey Chilli Potato, where crispy fries are tossed in a sweet and spicy sauce for the perfect flavour explosion.",
-      "thumb": "/creatives/sm/03.jpg",
+      "thumb": "/creatives/honey-chilli-potato-poster-stories-rajajinagar-540.webp",
       "slug": "honey-chilli-potato-poster-stories-rajajinagar",
       "case": "stories-bar-and-kitchen",
       "outlet": "Rajajinagar",
       "alt": "Honey chilli potato in a white bowl with honey dripping from a dipper and red chillies – food poster for Stories Bar & Kitchen, Rajajinagar",
-      "width": 549,
-      "height": 640
+      "width": 1080,
+      "height": 1259,
+      "source": "03.webp"
     },
     {
       "title": "Taste the Rainbow",
-      "image": "/creatives/lg/04.jpg",
+      "image": "/creatives/rainbow-layered-cocktail-poster-stories-rajajinagar.webp",
       "description": "A dazzling layered cocktail that's a true tropical sunset. Its vibrant colors and sweet, tangy notes make for a treat that delights all the senses.",
-      "thumb": "/creatives/sm/04.jpg",
+      "thumb": "/creatives/rainbow-layered-cocktail-poster-stories-rajajinagar-540.webp",
       "slug": "rainbow-layered-cocktail-poster-stories-rajajinagar",
       "case": "stories-bar-and-kitchen",
       "outlet": "Rajajinagar",
       "alt": "Blue-to-orange layered Rainbow cocktail with mint and an orange slice beside potted plants – drink poster for Stories Bar & Kitchen, Rajajinagar",
-      "width": 640,
-      "height": 640
+      "width": 1080,
+      "height": 1080,
+      "source": "04.webp"
     },
     {
       "title": "The Crowd's Favourite: Caramel Cheesecake",
-      "image": "/creatives/lg/05.jpg",
+      "image": "/creatives/caramel-cheesecake-poster-stories-rajajinagar.webp",
       "description": "Indulge in pure decadence. Our rich, creamy cheesecake with a luscious caramel topping is the sweet ending everyone is talking about.",
-      "thumb": "/creatives/sm/05.jpg",
+      "thumb": "/creatives/caramel-cheesecake-poster-stories-rajajinagar-540.webp",
       "slug": "caramel-cheesecake-poster-stories-rajajinagar",
       "case": "stories-bar-and-kitchen",
       "outlet": "Rajajinagar",
       "alt": "Slice of caramel cheesecake topped with a cherry on a dusted black plate against a green background – dessert poster for Stories Bar & Kitchen, Rajajinagar",
-      "width": 457,
-      "height": 640
+      "width": 1080,
+      "height": 1512,
+      "source": "05.webp"
     },
     {
       "title": "Classic Kadai Paneer",
-      "image": "/creatives/lg/06.jpg",
+      "image": "/creatives/kadai-paneer-poster-stories-rajajinagar.webp",
       "description": "Dive into a rich, creamy, and delicious curry featuring soft, fresh paneer and freshly ground kadai masala. A North Indian classic you simply can't resist.",
-      "thumb": "/creatives/sm/06.jpg",
+      "thumb": "/creatives/kadai-paneer-poster-stories-rajajinagar-540.webp",
       "slug": "kadai-paneer-poster-stories-rajajinagar",
       "case": "stories-bar-and-kitchen",
       "outlet": "Rajajinagar",
       "alt": "Bowl of kadai paneer with green capsicum and red chilli on a cream and rust background – food poster for Stories Bar & Kitchen, Rajajinagar",
-      "width": 640,
-      "height": 640
+      "width": 1080,
+      "height": 1080,
+      "source": "06.webp"
     },
     {
       "title": "A Slice of Veggie Delight",
-      "image": "/creatives/lg/07.jpg",
+      "image": "/creatives/veg-delight-pizza-poster-stories-rajajinagar.webp",
       "description": "Fresh veggies, melty cheese, and a perfect crisp crust. Honest flavors, made to satisfy your pizza cravings. It's simply delicious.",
-      "thumb": "/creatives/sm/07.jpg",
+      "thumb": "/creatives/veg-delight-pizza-poster-stories-rajajinagar-540.webp",
       "slug": "veg-delight-pizza-poster-stories-rajajinagar",
       "case": "stories-bar-and-kitchen",
       "outlet": "Rajajinagar",
       "alt": "Vegi Delight pizza with paneer and peppers on a wooden board against a green background – food poster for Stories Bar & Kitchen, Rajajinagar",
-      "width": 640,
-      "height": 640
+      "width": 1080,
+      "height": 1080,
+      "source": "07.webp"
     },
     {
       "title": "The Sizzler Experience",
-      "image": "/creatives/lg/08.jpg",
+      "image": "/creatives/sizzler-kairi-cooler-poster-stories-nagarbhavi.webp",
       "description": "It's more than a meal, it's an experience. Enjoy a hot sizzler loaded with fresh vegetables and our signature savory sauce, perfectly complemented by a tangy Kairi Cooler.",
-      "thumb": "/creatives/sm/08.jpg",
+      "thumb": "/creatives/sizzler-kairi-cooler-poster-stories-nagarbhavi-540.webp",
       "slug": "sizzler-kairi-cooler-poster-stories-nagarbhavi",
       "case": "stories-bar-and-kitchen",
       "outlet": "Nagarbhavi",
       "alt": "Vegetable sizzler with herbed rice and garlic bread, tartar sauce and a green Kairi Cooler – \"The Sizzler Experience\" poster for Stories Bar & Kitchen, Nagarbhavi",
-      "width": 640,
-      "height": 640
+      "width": 1080,
+      "height": 1080,
+      "source": "08.webp"
     },
     {
       "title": "This Week's Special: Coastal Prawn Fry",
-      "image": "/creatives/lg/09.jpg",
+      "image": "/creatives/prawn-fry-neer-dosa-poster-stories-nagarbhavi.webp",
       "description": "Experience a coastal classic with our authentic Prawn Fry, rich with traditional spices. Served with fluffy neer dosas, it's a combination you won't want to miss.",
-      "thumb": "/creatives/sm/09.jpg",
+      "thumb": "/creatives/prawn-fry-neer-dosa-poster-stories-nagarbhavi-540.webp",
       "slug": "prawn-fry-neer-dosa-poster-stories-nagarbhavi",
       "case": "stories-bar-and-kitchen",
       "outlet": "Nagarbhavi",
       "alt": "Prawn fry on a banana leaf with neer dosas on a copper platter – \"This Week's Special\" seafood poster for Stories Bar & Kitchen, Nagarbhavi",
-      "width": 640,
-      "height": 640
+      "width": 1080,
+      "height": 1080,
+      "source": "09.webp"
     },
     {
       "title": "Smoky Paneer Tikka",
-      "image": "/creatives/lg/10.jpg",
+      "image": "/creatives/paneer-tikka-poster-stories-nagarbhavi.webp",
       "description": "Perfectly grilled and bursting with flavor. Enjoy tender paneer marinated in a perfect blend of smoky spices. A classic appetizer that never disappoints.",
-      "thumb": "/creatives/sm/10.jpg",
+      "thumb": "/creatives/paneer-tikka-poster-stories-nagarbhavi-540.webp",
       "slug": "paneer-tikka-poster-stories-nagarbhavi",
       "case": "stories-bar-and-kitchen",
       "outlet": "Nagarbhavi",
       "alt": "Grilled paneer tikka skewers with mint chutney on a black slate board – food poster for Stories Bar & Kitchen, Nagarbhavi",
-      "width": 582,
-      "height": 640
+      "width": 1080,
+      "height": 1188,
+      "source": "10.webp"
     }
   ]
 }

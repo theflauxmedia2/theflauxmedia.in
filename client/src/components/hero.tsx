@@ -1,7 +1,6 @@
-import { motion } from "framer-motion";
 import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
-import { EASE_OUT, Headline, useOffscreenPause } from "@/components/motion";
+import { Headline, enterStyle, useOffscreenPause } from "@/components/motion";
 import { useWorks, videoThumbnail } from "@/lib/works";
 import { getRoute } from "@/seo/routes";
 
@@ -57,18 +56,13 @@ export default function Hero() {
 
       <div className="relative mx-auto grid w-full max-w-[1400px] flex-1 grid-cols-1 items-center gap-10 px-5 sm:px-8 lg:grid-cols-12 lg:px-12">
         <div className="relative z-10 lg:col-span-7">
-          <motion.h1
-            className="eyebrow mb-6 flex items-center gap-3 sm:mb-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-          >
+          <h1 className="enter eyebrow mb-6 flex items-center gap-3 sm:mb-8" style={enterStyle(0.1)}>
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-flame opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-flame" />
             </span>
             {getRoute("/").h1}
-          </motion.h1>
+          </h1>
 
           <Headline
             as="p"
@@ -82,11 +76,7 @@ export default function Hero() {
             ]}
           />
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: EASE_OUT, delay: 0.55 }}
-          >
+          <div className="enter" style={enterStyle(0.55, 16)}>
             <p className="mt-8 max-w-xl text-lg leading-relaxed text-mute sm:text-xl">
               We're a creative media and digital marketing agency in South Bengaluru. Instagram reels, social media
               posters, brand films, websites and ad campaigns — built to stop thumbs and turn that attention into
@@ -101,26 +91,22 @@ export default function Hero() {
                 Start a project
               </Link>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Drifting wall of real work */}
-        <motion.div
+        <div
           aria-hidden
-          className="relative -mx-5 h-[46vh] sm:-mx-8 lg:col-span-5 lg:mx-0 lg:h-[min(70vh,720px)]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: mixed.length ? 1 : 0 }}
-          transition={{ duration: 1.2, delay: 0.3 }}
+          className="enter relative -mx-5 h-[46vh] sm:-mx-8 lg:col-span-5 lg:mx-0 lg:h-[min(70vh,720px)]"
+          style={{ ...enterStyle(0.3), animationDuration: "1.2s" }}
         >
-          <div className="absolute inset-0 grid grid-cols-3 gap-3 overflow-hidden rounded-2xl">
+          {/* Tilted wall, no overlays on top of it */}
+          <div className="absolute inset-0 grid -rotate-[4deg] scale-105 grid-cols-3 gap-3 overflow-hidden rounded-2xl">
             <ReelColumn tiles={columns[0]} className="drift-up" duration="70s" />
-            <ReelColumn tiles={columns[1]} className="drift-down" duration="85s" />
-            <ReelColumn tiles={columns[2]} className="drift-up" duration="75s" />
+            <ReelColumn tiles={columns[1]} className="drift-down -mt-24" duration="85s" />
+            <ReelColumn tiles={columns[2]} className="drift-up -mt-48" duration="75s" />
           </div>
-          {/* Soft top/bottom fade into the page */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-ink to-transparent" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-ink to-transparent" />
-        </motion.div>
+        </div>
       </div>
 
       {/* Discipline ticker */}

@@ -36,6 +36,11 @@ export interface WorksData {
 // Imported at build time so portfolio text and images are in the pre-rendered HTML
 export const WORKS = worksData as WorksData;
 
+/** 540w + 1080w sources for a creative. */
+export function creativeSrcSet(c: CreativeItem): string {
+  return `${c.thumb ?? c.image} 540w, ${c.image} 1080w`;
+}
+
 export function creative(slug: string): CreativeItem {
   const found = WORKS.creatives.find((c) => c.slug === slug);
   if (!found) throw new Error(`Unknown creative: ${slug}`);

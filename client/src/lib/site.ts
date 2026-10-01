@@ -52,13 +52,13 @@ export const NAV_LINKS = [
 ] as const;
 
 export const BRANDS = [
-  { name: "Stories Brewery & Kitchen", logo: "/brand-logos/stbc.png", width: 644, height: 387 },
-  { name: "Madhuram Cafe", logo: "/brand-logos/madhuram.png", width: 322, height: 322, badge: true },
-  { name: "CNU", logo: "/brand-logos/cnu.png", width: 475, height: 475, badge: true },
-  { name: "101", logo: "/brand-logos/101.png", width: 856, height: 856, badge: true },
+  { name: "Stories Brewery & Kitchen", logo: "/brand-logos/stbc.webp", width: 266, height: 160 },
+  { name: "Madhuram Cafe", logo: "/brand-logos/madhuram.webp", width: 160, height: 160, badge: true },
+  { name: "CNU", logo: "/brand-logos/cnu.webp", width: 160, height: 160, badge: true },
+  { name: "101", logo: "/brand-logos/101.webp", width: 160, height: 160, badge: true },
   { name: "Global Computers", logo: "/brand-logos/gc.png", width: 345, height: 102 },
-  { name: "Macaw", logo: "/brand-logos/macaw.png", width: 313, height: 411 },
-  { name: "Moai", logo: "/brand-logos/moai.png", width: 707, height: 353 },
-  { name: "Stories 2.0", logo: "/brand-logos/st2.png", width: 320, height: 320 },
-  { name: "Stories Brewery", logo: "/brand-logos/stbk.png", width: 647, height: 386 },
+  { name: "Macaw", logo: "/brand-logos/macaw.webp", width: 122, height: 160 },
+  { name: "Moai", logo: "/brand-logos/moai.webp", width: 320, height: 160 },
+  { name: "Stories 2.0", logo: "/brand-logos/st2.webp", width: 160, height: 160 },
+  { name: "Stories Brewery", logo: "/brand-logos/stbk.webp", width: 268, height: 160 },
 ];

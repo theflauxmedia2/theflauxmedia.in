@@ -6,7 +6,7 @@ import Approach from "@/components/about";
 import BrandMarquee from "@/components/brand-marquee";
 import Contact from "@/components/contact";
 import { EASE_OUT, Eyebrow, Headline, Reveal } from "@/components/motion";
-import { creative } from "@/lib/works";
+import { creative, creativeSrcSet } from "@/lib/works";
 import { Link } from "wouter";
 import { CONTACT, FOUNDER, FOUNDING_YEAR } from "@/lib/site";
 
@@ -78,7 +78,7 @@ export default function About() {
               <div
                 className={`overflow-hidden rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.5)] ${["-rotate-3", "rotate-2", "-rotate-1"][i]}`}
               >
-                <img src={img.thumb} alt={img.alt} width={img.width} height={img.height} loading="lazy" className="aspect-[4/5] w-full object-cover" />
+                <img src={img.thumb} srcSet={creativeSrcSet(img)} sizes="(min-width: 1024px) 24vw, 46vw" alt={img.alt} width={img.width} height={img.height} loading="lazy" className="aspect-[4/5] w-full object-cover" />
               </div>
             </motion.div>
           ))}

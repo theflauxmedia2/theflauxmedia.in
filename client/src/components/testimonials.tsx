@@ -7,14 +7,14 @@ type Testimonial = {
   quote: string;
   name: string;
   role: string;
-  /** Optional client logo, e.g. "/brand-logos/macaw.png". Initials are shown without one. */
+  /** Optional client logo, e.g. "/brand-logos/macaw.webp". Initials are shown without one. */
   logo?: string;
 };
 
 /*
  * Add real client quotes here — the section stays hidden while this list is empty.
  * Example:
- * { quote: "…", name: "Jane Doe", role: "Founder, Macaw", logo: "/brand-logos/macaw.png" },
+ * { quote: "…", name: "Jane Doe", role: "Founder, Macaw", logo: "/brand-logos/macaw.webp" },
  */
 const TESTIMONIALS: Testimonial[] = [];
 

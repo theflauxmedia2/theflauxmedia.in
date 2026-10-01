@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
-import { motion } from "framer-motion";
-import { EASE_OUT, Headline } from "@/components/motion";
+import { Headline, enterStyle } from "@/components/motion";
 
 type PageHeaderProps = {
   /** The page's single, keyword-bearing H1 (from seo/routes) — shown as the small label above the display headline. */
@@ -20,35 +19,19 @@ export default function PageHeader({ h1, lines, intro, aside, breadcrumbs }: Pag
       />
       <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
         {breadcrumbs}
-        <motion.h1
-          className="eyebrow mb-8 max-w-xl"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-        >
-          {h1}
-        </motion.h1>
+        <h1 className="enter eyebrow mb-8 max-w-xl">{h1}</h1>
         <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
           <Headline as="p" onMount delay={0.1} className="text-[16vw] text-bone sm:text-8xl lg:text-[8.5rem]" lines={lines} />
           {aside && (
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: EASE_OUT, delay: 0.4 }}
-            >
+            <div className="enter" style={enterStyle(0.4, 12)}>
               {aside}
-            </motion.div>
+            </div>
           )}
         </div>
         {intro && (
-          <motion.p
-            className="mt-10 max-w-2xl text-lg leading-relaxed text-mute sm:text-xl"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: EASE_OUT, delay: 0.35 }}
-          >
+          <p className="enter mt-10 max-w-2xl text-lg leading-relaxed text-mute sm:text-xl" style={enterStyle(0.35, 12)}>
             {intro}
-          </motion.p>
+          </p>
         )}
       </div>
     </header>

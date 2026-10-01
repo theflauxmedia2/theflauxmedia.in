@@ -11,7 +11,7 @@ import Contact from "@/components/contact";
 import CaseCards from "@/components/case-cards";
 import { CASE_STUDIES } from "@/content/cases";
 import { EASE_OUT } from "@/components/motion";
-import { clientName, useWorks } from "@/lib/works";
+import { clientName, creativeSrcSet, useWorks } from "@/lib/works";
 
 type Tab = "reels" | "creatives";
 
@@ -70,7 +70,7 @@ export default function OurWork() {
                   />
                 )}
                 <span className="relative">{t.label}</span>
-                <span className="relative font-mono text-xs opacity-60">{t.count}</span>
+                <span className="relative font-mono text-xs opacity-80">{t.count}</span>
               </button>
             ))}
           </div>
@@ -121,6 +121,8 @@ export default function OurWork() {
                 >
                   <img
                     src={creative.thumb ?? creative.image}
+                    srcSet={creativeSrcSet(creative)}
+                    sizes="(min-width: 1024px) 33vw, 50vw"
                     alt={creative.alt}
                     width={creative.width}
                     height={creative.height}

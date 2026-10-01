@@ -1,5 +1,5 @@
 import { motion, useInView, type HTMLMotionProps } from "framer-motion";
-import { useRef, type ReactNode } from "react";
+import { useRef, type CSSProperties, type ReactNode } from "react";
 
 export const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 
@@ -8,6 +8,11 @@ export function useOffscreenPause<T extends HTMLElement>() {
   const ref = useRef<T>(null);
   const inView = useInView(ref, { margin: "100px" });
   return { ref, paused: !inView };
+}
+
+/** Style for the CSS `.enter` entrance (above the fold), which plays from the pre-rendered HTML before JS loads. */
+export function enterStyle(delay = 0, y = 0): CSSProperties {
+  return { ["--enter-delay" as string]: `${delay}s`, ["--enter-y" as string]: `${y}px` };
 }
 
 type RevealProps = HTMLMotionProps<"div"> & {
@@ -35,19 +40,31 @@ type HeadlineProps = {
   lines: ReactNode[];
   className?: string;
   delay?: number;
-  /** Animate immediately instead of waiting for the viewport (use above the fold). */
+  /** Animate on load (CSS) instead of waiting for the viewport — use above the fold. */
   onMount?: boolean;
 };
 
 /** Headline whose lines rise out of a mask, one after another. */
 export function Headline({ as = "h2", lines, className = "", delay = 0, onMount = false }: HeadlineProps) {
-  const Tag = motion[as];
-  const trigger = onMount
-    ? { initial: "hidden", animate: "shown" }
-    : { initial: "hidden", whileInView: "shown", viewport: { once: true, margin: "-80px" } };
+  if (onMount) {
+    // CSS-driven so the headline isn't hidden until hydration
+    const Tag = as;
+    return (
+      <Tag className={`headline ${className}`}>
+        {lines.map((line, i) => (
+          <span key={i} className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
+            <span className="enter-rise block" style={enterStyle(delay + i * 0.08)}>
+              {line}
+            </span>
+          </span>
+        ))}
+      </Tag>
+    );
+  }
 
+  const Tag = motion[as];
   return (
-    <Tag className={`headline ${className}`} {...trigger}>
+    <Tag className={`headline ${className}`} initial="hidden" whileInView="shown" viewport={{ once: true, margin: "-80px" }}>
       {lines.map((line, i) => (
         <span key={i} className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
           <motion.span

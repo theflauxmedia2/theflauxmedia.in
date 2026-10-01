@@ -1,11 +1,10 @@
 import { useState, type FormEvent } from "react";
-import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import FaqList from "@/components/faq-list";
 import PageShell from "@/components/page-shell";
 import PageHeader from "@/components/page-header";
 import { getRoute } from "@/seo/routes";
-import { EASE_OUT, Eyebrow, Headline, Reveal } from "@/components/motion";
+import { Eyebrow, Headline, Reveal, enterStyle } from "@/components/motion";
 import { CONTACT, SERVICE_AREAS, SITE_NAME } from "@/lib/site";
 import { Link } from "wouter";
 import { CONTACT_FAQS } from "@/content/contact";
@@ -106,12 +105,7 @@ export default function Contact() {
         </Reveal>
 
         {/* Brief form */}
-        <motion.div
-          className="rounded-3xl border border-line bg-ink-raised p-6 sm:p-10 lg:col-span-8"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: EASE_OUT, delay: 0.45 }}
-        >
+        <div className="enter rounded-3xl border border-line bg-ink-raised p-6 sm:p-10 lg:col-span-8" style={enterStyle(0.45, 24)}>
           <h2 className="headline text-4xl text-bone sm:text-5xl">Send us a brief</h2>
           <p className="mt-3 text-mute">It opens WhatsApp with your message ready to send.</p>
 
@@ -155,7 +149,7 @@ export default function Contact() {
               </a>
             </div>
           </form>
-        </motion.div>
+        </div>
       </section>
 
       {/* Service area */}

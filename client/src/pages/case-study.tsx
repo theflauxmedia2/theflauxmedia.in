@@ -12,7 +12,7 @@ import CaseCards from "@/components/case-cards";
 import Contact from "@/components/contact";
 import { Eyebrow, Reveal } from "@/components/motion";
 import { CASE_STUDIES, casePath, getCaseStudy } from "@/content/cases";
-import { WORKS, cleanDescription } from "@/lib/works";
+import { WORKS, cleanDescription, creativeSrcSet } from "@/lib/works";
 import { getRoute } from "@/seo/routes";
 import NotFound from "@/pages/not-found";
 
@@ -102,6 +102,8 @@ export default function CaseStudy({ params }: { params: { slug: string } }) {
                     >
                       <img
                         src={c.thumb ?? c.image}
+                        srcSet={creativeSrcSet(c)}
+                        sizes="(min-width: 1024px) 33vw, 50vw"
                         alt={c.alt}
                         width={c.width}
                         height={c.height}

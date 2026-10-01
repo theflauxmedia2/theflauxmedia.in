@@ -8,7 +8,10 @@
     <!--app-head-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400&display=swap" rel="stylesheet" />
+    <!-- Fonts load without blocking first paint (display=swap) -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400&display=swap" /></noscript>
     <link rel="preconnect" href="https://i.ytimg.com" />
     <link rel="icon" href="/logo/favicon.ico" type="image/x-icon" />
     <link rel="manifest" href="/manifest.json" />

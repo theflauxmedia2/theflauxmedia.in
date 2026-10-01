@@ -14,7 +14,7 @@ import Contact from "@/components/contact";
 import { EASE_OUT, Eyebrow, Headline } from "@/components/motion";
 import { RESTAURANT_PAGE as PAGE } from "@/content/industry";
 import { CONTACT } from "@/lib/site";
-import { WORKS } from "@/lib/works";
+import { WORKS, creativeSrcSet } from "@/lib/works";
 import { getRoute } from "@/seo/routes";
 
 // Every F&B reel (everything except the gaming event)
@@ -117,6 +117,8 @@ export default function RestaurantMarketing() {
               <li key={c.slug} className="w-[60vw] shrink-0 snap-start sm:w-auto">
                 <img
                   src={c.thumb ?? c.image}
+                  srcSet={creativeSrcSet(c)}
+                  sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 60vw"
                   alt={c.alt}
                   width={c.width}
                   height={c.height}

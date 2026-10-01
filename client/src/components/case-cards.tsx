@@ -1,15 +1,15 @@
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
 import { CASE_STUDIES, casePath } from "@/content/cases";
-import { WORKS, videoThumbnail } from "@/lib/works";
+import { WORKS, creativeSrcSet, videoThumbnail } from "@/lib/works";
 
 /** Cover image for a case: first creative, else first reel thumbnail. */
 export function caseCover(slug: string) {
   const still = WORKS.creatives.find((c) => c.case === slug);
-  if (still) return { src: still.thumb ?? still.image, alt: still.alt, width: still.width ?? 640, height: still.height ?? 640 };
+  if (still) return { src: still.thumb ?? still.image, srcSet: creativeSrcSet(still), alt: still.alt, width: still.width ?? 640, height: still.height ?? 640 };
   const video = WORKS.videos.find((v) => v.case === slug);
   return video
-    ? { src: videoThumbnail(video), alt: `${video.title} reel by The Flaux Media`, width: 480, height: 360 }
+    ? { src: videoThumbnail(video), srcSet: undefined, alt: `${video.title} reel by The Flaux Media`, width: 480, height: 360 }
     : null;
 }
 
@@ -29,6 +29,8 @@ export default function CaseCards({ slugs, className = "" }: { slugs: string[]; 
                 <div className="aspect-[4/3] overflow-hidden">
                   <img
                     src={cover.src}
+                    srcSet={cover.srcSet}
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     alt={cover.alt}
                     width={cover.width}
                     height={cover.height}

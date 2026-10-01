@@ -90,7 +90,7 @@ const core: RouteMeta[] = [
     path: "/about",
     title: "About The Flaux Media: Creative Agency, Bengaluru",
     description:
-      "The Flaux Media is a creative media and marketing studio founded by Amaan Saify and based on Bannerghatta Road, South Bengaluru. The studio behind the reels, posters and websites.",
+      "The Flaux Media is a creative media and marketing studio founded in 2025 by Amaan Saify and team, based on Bannerghatta Road in South Bengaluru — the studio behind the reels, posters and websites.",
     h1: "About The Flaux Media",
     breadcrumbs: [{ name: "About", path: "/about" }],
     sitemap: { priority: 0.7, changefreq: "monthly" },

@@ -8,7 +8,7 @@ import Contact from "@/components/contact";
 import { EASE_OUT, Eyebrow, Headline, Reveal } from "@/components/motion";
 import { creative, creativeSrcSet } from "@/lib/works";
 import { Link } from "wouter";
-import { CONTACT, FOUNDER, FOUNDING_YEAR } from "@/lib/site";
+import { CONTACT, FOUNDING_YEAR } from "@/lib/site";
 
 const VALUES = [
   {
@@ -91,7 +91,7 @@ export default function About() {
           <Eyebrow className="mb-6">Who we are</Eyebrow>
           {/* TODO(owner): add a founder photo (and a real bio paragraph) here. */}
           <h2 className="headline text-5xl text-bone sm:text-6xl">
-            Founded in {FOUNDING_YEAR} by <span className="accent">{FOUNDER}.</span>
+            Founded in {FOUNDING_YEAR} by <span className="accent">Amaan &amp; team.</span>
           </h2>
         </div>
         <div className="space-y-10 lg:col-span-7">

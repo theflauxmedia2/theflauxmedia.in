@@ -22,7 +22,7 @@ export const CONTACT = {
 };
 
 export const FOUNDER = "Amaan Saify";
-export const FOUNDING_YEAR = "2024";
+export const FOUNDING_YEAR = "2025";
 
 export const TAGLINE = "Creative & digital marketing agency in South Bengaluru, Karnataka";
 

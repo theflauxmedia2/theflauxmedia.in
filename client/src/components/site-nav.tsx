@@ -32,7 +32,7 @@ export default function SiteNav() {
       <header className="absolute inset-x-0 top-0 z-50">
         <div className="mx-auto flex h-20 max-w-[1400px] items-center justify-between px-5 sm:px-8 lg:h-24 lg:px-12">
           <Link href="/" aria-label="The Flaux Media — home" className="-m-2 p-2">
-            <img src="/logo/logo.png" alt="" className="h-10 w-auto lg:h-12" width={48} height={48} />
+            <img src="/logo/logo.png" alt="" width={984} height={1105} className="h-10 w-auto lg:h-12" />
           </Link>
 
           <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
@@ -89,7 +89,7 @@ export default function SiteNav() {
           >
             <div className="flex h-20 items-center justify-between">
               <Link href="/" aria-label="Home" className="-m-2 p-2">
-                <img src="/logo/logo.png" alt="" className="h-10 w-auto" />
+                <img src="/logo/logo.png" alt="" width={984} height={1105} className="h-10 w-auto" />
               </Link>
               <button
                 type="button"

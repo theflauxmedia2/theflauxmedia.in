@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Expand } from "lucide-react";
 import PageShell from "@/components/page-shell";
 import PageHeader from "@/components/page-header";
+import { getRoute } from "@/seo/routes";
 import ReelCard from "@/components/reel-card";
 import VideoLightbox from "@/components/video-lightbox";
 import Lightbox from "@/components/lightbox";
@@ -44,7 +45,7 @@ export default function OurWork() {
   return (
     <PageShell>
       <PageHeader
-        eyebrow="Our work"
+        h1={getRoute("/our-work").h1}
         lines={["Work that", <span className="accent">moves.</span>]}
         intro="The brands we've partnered with and the stories we've helped bring to life — through striking visuals, scroll-stopping reels and campaigns built to perform."
         aside={
@@ -118,7 +119,9 @@ export default function OurWork() {
                 >
                   <img
                     src={creative.thumb ?? creative.image}
-                    alt={creative.title}
+                    alt={creative.alt}
+                    width={creative.width}
+                    height={creative.height}
                     loading="lazy"
                     decoding="async"
                     className="w-full transition-transform duration-700 ease-out group-hover:scale-105"
@@ -157,7 +160,7 @@ export default function OurWork() {
           <img
             key={image.image}
             src={image.image}
-            alt={image.title}
+            alt={image.alt}
             className="max-h-[72vh] w-auto max-w-full rounded-2xl object-contain"
           />
         )}

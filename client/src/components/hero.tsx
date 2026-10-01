@@ -3,10 +3,11 @@ import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
 import { EASE_OUT, Headline, useOffscreenPause } from "@/components/motion";
 import { useWorks, videoThumbnail } from "@/lib/works";
+import { getRoute } from "@/seo/routes";
 
 const DISCIPLINES = ["Brand films", "Reels", "Photography", "Social media", "Campaigns", "Websites"];
 
-type Tile = { src: string; tall: boolean };
+type Tile = { src: string; tall: boolean; width: number; height: number };
 
 function ReelColumn({ tiles, className, duration }: { tiles: Tile[]; className: string; duration: string }) {
   // Rendered twice so the -50% drift loops seamlessly
@@ -18,6 +19,8 @@ function ReelColumn({ tiles, className, duration }: { tiles: Tile[]; className: 
           key={i}
           src={tile.src}
           alt=""
+          width={tile.width}
+          height={tile.height}
           decoding="async"
           className={`block w-full shrink-0 rounded-xl bg-ink-high object-cover ${tile.tall ? "aspect-[9/16]" : "aspect-[4/5]"}`}
         />
@@ -31,9 +34,9 @@ export default function Hero() {
 
   const reels: Tile[] = videos.flatMap((v) => {
     const src = videoThumbnail(v);
-    return src ? [{ src, tall: true }] : [];
+    return [{ src, tall: true, width: 480, height: 360 }];
   });
-  const stills: Tile[] = creatives.map((c) => ({ src: c.thumb ?? c.image, tall: false }));
+  const stills: Tile[] = creatives.map((c) => ({ src: c.thumb ?? c.image, tall: false, width: c.width ?? 640, height: c.height ?? 640 }));
 
   // Interleave reels and stills into three columns with different rhythms
   const mixed: Tile[] = [];
@@ -54,7 +57,7 @@ export default function Hero() {
 
       <div className="relative mx-auto grid w-full max-w-[1400px] flex-1 grid-cols-1 items-center gap-10 px-5 sm:px-8 lg:grid-cols-12 lg:px-12">
         <div className="relative z-10 lg:col-span-7">
-          <motion.p
+          <motion.h1
             className="eyebrow mb-6 flex items-center gap-3 sm:mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -64,11 +67,11 @@ export default function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-flame opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-flame" />
             </span>
-            Creative media studio — Bengaluru
-          </motion.p>
+            {getRoute("/").h1}
+          </motion.h1>
 
           <Headline
-            as="h1"
+            as="p"
             onMount
             delay={0.15}
             className="text-[16vw] text-bone sm:text-[11vw] lg:text-[clamp(4.5rem,7.6vw,8.75rem)]"
@@ -85,8 +88,9 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: EASE_OUT, delay: 0.55 }}
           >
             <p className="mt-8 max-w-xl text-lg leading-relaxed text-mute sm:text-xl">
-              Reels, brand films, photography and social built to stop thumbs — and the strategy and tech to turn
-              that attention into growth.
+              We're a creative media and digital marketing agency in South Bengaluru. Instagram reels, social media
+              posters, brand films, websites and ad campaigns — built to stop thumbs and turn that attention into
+              walk-ins, orders and enquiries.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link href="/our-work" className="btn btn-primary group text-base">

@@ -3,65 +3,25 @@ import { ArrowUpRight, Check } from "lucide-react";
 import { Link } from "wouter";
 import PageShell from "@/components/page-shell";
 import PageHeader from "@/components/page-header";
+import { getRoute } from "@/seo/routes";
 import Contact from "@/components/contact";
-import { EASE_OUT, Reveal } from "@/components/motion";
+import { EASE_OUT, Eyebrow, Headline, Reveal } from "@/components/motion";
+import FaqList from "@/components/faq-list";
+import { PACKAGES, PACKAGE_FAQS } from "@/content/packages";
 
-const packages = [
-  {
-    name: "Flaux Lite",
-    highlight: "Perfect for brands starting their digital journey.",
-    features: [
-      "Video Shooting",
-      "Video Editing",
-      "Foundational Social Media Handling",
-      "Google My Business Setup and Basic Management",
-      "1 time brand audit",
-      "Monthly growth reports",
-    ],
-  },
-  {
-    name: "Flaux Surge",
-    highlight: "For brands ready to scale with strategy and design.",
-    badge: "Most complete",
-    features: [
-      "Video Shooting",
-      "Video Editing",
-      "Strategic Social Media Handling",
-      "Static Website",
-      "Basic SEO and Regular Management",
-      "Google My Business Setup and Management",
-      "One Time Graphic Design / Creatives",
-      "Advanced Monthly performance reports",
-      "Content Calendar Creation",
-    ],
-  },
-  {
-    name: "Flaux Velocity",
-    highlight: "For ambitious brands seeking high performance.",
-    features: [
-      "DSLR Video Shooting",
-      "Professional Video Editing",
-      "Performance-Driven Social Media Strategy",
-      "Professional Dynamic Website",
-      "Advanced SEO and Website Management",
-      "Google My Business Setup and Management",
-      "Dynamic Graphic Design",
-    ],
-  },
-];
 
 export default function Packages() {
   return (
     <PageShell>
       <PageHeader
-        eyebrow="Packages"
+        h1={getRoute("/packages").h1}
         lines={["Pick your", <span className="accent">pace.</span>]}
         intro="Choose the growth engine that fits where your brand is today. Every package is crafted for impact, value and results."
       />
 
       <section className="mx-auto max-w-[1400px] px-5 pb-16 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          {packages.map((pkg, i) => {
+          {PACKAGES.map((pkg, i) => {
             const featured = Boolean(pkg.badge);
             return (
               <motion.article
@@ -139,6 +99,16 @@ export default function Packages() {
           </Link>
           .
         </Reveal>
+      </section>
+
+      <section className="border-t border-line py-24 sm:py-32">
+        <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:px-12">
+          <div className="lg:col-span-4">
+            <Eyebrow className="mb-6">Package FAQs</Eyebrow>
+            <Headline as="h2" className="text-6xl text-bone sm:text-7xl" lines={["Before you", <span className="accent">pick one.</span>]} />
+          </div>
+          <FaqList faqs={PACKAGE_FAQS} className="lg:col-span-8" />
+        </div>
       </section>
 
       <Contact />

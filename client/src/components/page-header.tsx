@@ -3,13 +3,15 @@ import { motion } from "framer-motion";
 import { EASE_OUT, Headline } from "@/components/motion";
 
 type PageHeaderProps = {
-  eyebrow: string;
+  /** The page's single, keyword-bearing H1 (from seo/routes) — shown as the small label above the display headline. */
+  h1: string;
+  eyebrow?: string;
   lines: ReactNode[];
   intro?: ReactNode;
   aside?: ReactNode;
 };
 
-export default function PageHeader({ eyebrow, lines, intro, aside }: PageHeaderProps) {
+export default function PageHeader({ h1, lines, intro, aside, breadcrumbs }: PageHeaderProps & { breadcrumbs?: ReactNode }) {
   return (
     <header className="relative overflow-hidden pb-16 pt-36 sm:pb-20 sm:pt-44 lg:pt-48">
       <div
@@ -17,16 +19,17 @@ export default function PageHeader({ eyebrow, lines, intro, aside }: PageHeaderP
         className="pointer-events-none absolute -right-40 -top-20 h-[460px] w-[460px] bg-[radial-gradient(closest-side,rgba(247,99,0,0.15),transparent)]"
       />
       <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
-        <motion.p
-          className="eyebrow mb-8"
+        {breadcrumbs}
+        <motion.h1
+          className="eyebrow mb-8 max-w-xl"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
-          {eyebrow}
-        </motion.p>
+          {h1}
+        </motion.h1>
         <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-          <Headline as="h1" onMount delay={0.1} className="text-[16vw] text-bone sm:text-8xl lg:text-[8.5rem]" lines={lines} />
+          <Headline as="p" onMount delay={0.1} className="text-[16vw] text-bone sm:text-8xl lg:text-[8.5rem]" lines={lines} />
           {aside && (
             <motion.div
               initial={{ opacity: 0, y: 12 }}

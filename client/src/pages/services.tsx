@@ -15,8 +15,10 @@ import {
 } from "lucide-react";
 import PageShell from "@/components/page-shell";
 import PageHeader from "@/components/page-header";
+import { getRoute } from "@/seo/routes";
 import Contact from "@/components/contact";
 import { EASE_OUT, Reveal } from "@/components/motion";
+import { creative } from "@/lib/works";
 
 type ServiceItem = { icon: keyof typeof iconMap; title: string; desc: string };
 
@@ -35,11 +37,11 @@ const iconMap = {
   search: Search,
 };
 
-const SERVICES_DATA: { category: string; blurb: string; image: string; items: ServiceItem[] }[] = [
+const SERVICES_DATA: { category: string; blurb: string; image: ReturnType<typeof creative>; items: ServiceItem[] }[] = [
   {
     category: "Content Creation & Media Production",
     blurb: "From concept to camera to cut — everything you need to show up beautifully.",
-    image: "/creatives/sm/08.jpg",
+    image: creative("sizzler-kairi-cooler-poster-stories-nagarbhavi"),
     items: [
       { icon: "film", title: "Brand Films & Ad Videos", desc: "We craft cinematic visuals that tell stories, build emotion, and strengthen brand recall." },
       { icon: "camera", title: "Product & Campaign Shoots", desc: "From concept to camera, we capture visuals that drive engagement and conversions." },
@@ -51,7 +53,7 @@ const SERVICES_DATA: { category: string; blurb: string; image: string; items: Se
   {
     category: "Strategy & Media Marketing",
     blurb: "The thinking behind the content — so every post has a reason to exist.",
-    image: "/creatives/sm/02.jpg",
+    image: creative("honey-dew-mocktail-poster-stories-rajajinagar"),
     items: [
       { icon: "target", title: "Content Strategy", desc: "Data-backed storytelling designed to connect and convert." },
       { icon: "users", title: "Social Media Management", desc: "Consistent, creative brand presence that builds community and trust." },
@@ -62,7 +64,7 @@ const SERVICES_DATA: { category: string; blurb: string; image: string; items: Se
   {
     category: "Digital Growth & Technology",
     blurb: "15+ websites shipped — many for top F&B brands in Bengaluru, and ranking on Google. Built to turn attention into enquiries.",
-    image: "/creatives/sm/04.jpg",
+    image: creative("rainbow-layered-cocktail-poster-stories-rajajinagar"),
     items: [
       { icon: "globe", title: "Web Development", desc: "Custom, fast, SEO-optimized websites designed and built in-house — from restaurant sites to full brand experiences." },
       { icon: "trending-up", title: "Digital Marketing", desc: "Strategic campaigns that amplify reach and generate real results." },
@@ -75,7 +77,7 @@ export default function Services() {
   return (
     <PageShell>
       <PageHeader
-        eyebrow="Services"
+        h1={getRoute("/services").h1}
         lines={["Made to be", <span className="accent">noticed.</span>]}
         intro="A focused stack of offerings for ambitious brands — production, strategy and technology under one roof."
       />
@@ -90,7 +92,7 @@ export default function Services() {
                   <h2 className="headline max-w-md text-5xl text-bone sm:text-6xl">{group.category}</h2>
                   <p className="mt-5 max-w-sm leading-relaxed text-mute">{group.blurb}</p>
                   <div className="mt-8 hidden aspect-square max-w-sm overflow-hidden rounded-2xl lg:block">
-                    <img src={group.image} alt="" loading="lazy" className="h-full w-full object-cover" />
+                    <img src={group.image.thumb} alt={group.image.alt} width={group.image.width} height={group.image.height} loading="lazy" className="h-full w-full object-cover" />
                   </div>
                 </Reveal>
               </div>

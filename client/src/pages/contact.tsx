@@ -1,36 +1,16 @@
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Plus } from "lucide-react";
-import * as Accordion from "@radix-ui/react-accordion";
+import { ArrowUpRight } from "lucide-react";
+import FaqList from "@/components/faq-list";
 import PageShell from "@/components/page-shell";
 import PageHeader from "@/components/page-header";
+import { getRoute } from "@/seo/routes";
 import { EASE_OUT, Eyebrow, Headline, Reveal } from "@/components/motion";
 import { CONTACT } from "@/lib/site";
+import { CONTACT_FAQS } from "@/content/contact";
 
 const NEEDS = ["Reels & short-form", "Brand film", "Photography", "Social media", "Branding & design", "Website", "Ads & growth"];
 
-const FAQS = [
-  {
-    question: "What's your typical project timeline?",
-    answer:
-      "Project timelines vary depending on scope and complexity. A simple website might take 2-4 weeks, while a comprehensive brand overhaul could take 2-3 months. We'll provide detailed timelines during our initial consultation.",
-  },
-  {
-    question: "Do you work with startups?",
-    answer:
-      "Absolutely! We love working with startups and have special packages designed for growing businesses. We understand budget constraints and can create scalable solutions that grow with your company.",
-  },
-  {
-    question: "What's included in your retainer packages?",
-    answer:
-      "Our retainer packages include ongoing support, regular updates, performance monitoring, and priority access to our team. We'll customize the package based on your specific needs and goals.",
-  },
-  {
-    question: "Can you help with existing projects?",
-    answer:
-      "Yes! We can audit your existing digital presence, identify areas for improvement, and help optimize your current marketing efforts. We're experienced in taking over mid-project work.",
-  },
-];
 
 const fieldClass =
   "peer w-full border-0 border-b border-line bg-transparent px-0 pb-3 pt-7 text-lg text-bone placeholder-transparent transition-colors duration-200 focus:border-flame focus:outline-none focus:ring-0 focus-visible:outline-none";
@@ -83,7 +63,7 @@ export default function Contact() {
   return (
     <PageShell>
       <PageHeader
-        eyebrow="Contact"
+        h1={getRoute("/contact").h1}
         lines={["Let's", <span className="accent">talk.</span>]}
         intro="Your next big move starts here. Tell us what you're working on — we usually reply within 24 hours."
       />
@@ -184,24 +164,7 @@ export default function Contact() {
             <Eyebrow className="mb-6">FAQ</Eyebrow>
             <Headline className="text-6xl text-bone sm:text-7xl" lines={["Good", <span className="accent">questions.</span>]} />
           </div>
-          <Accordion.Root type="single" collapsible className="lg:col-span-8">
-            {FAQS.map((faq) => (
-              <Accordion.Item key={faq.question} value={faq.question} className="border-b border-line first:border-t">
-                <Accordion.Header>
-                  <Accordion.Trigger className="group flex w-full items-center justify-between gap-6 py-7 text-left">
-                    <span className="headline text-2xl text-bone sm:text-3xl">{faq.question}</span>
-                    <Plus
-                      size={22}
-                      className="shrink-0 text-flame transition-transform duration-300 ease-out group-data-[state=open]:rotate-45"
-                    />
-                  </Accordion.Trigger>
-                </Accordion.Header>
-                <Accordion.Content className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
-                  <p className="max-w-2xl pb-8 leading-relaxed text-mute">{faq.answer}</p>
-                </Accordion.Content>
-              </Accordion.Item>
-            ))}
-          </Accordion.Root>
+          <FaqList faqs={CONTACT_FAQS} className="lg:col-span-8" />
         </div>
       </section>
     </PageShell>

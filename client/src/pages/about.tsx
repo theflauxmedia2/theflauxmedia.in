@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import PageShell from "@/components/page-shell";
 import PageHeader from "@/components/page-header";
+import { getRoute } from "@/seo/routes";
 import Approach from "@/components/about";
 import BrandMarquee from "@/components/brand-marquee";
 import Contact from "@/components/contact";
 import { EASE_OUT, Eyebrow, Headline, Reveal } from "@/components/motion";
+import { creative } from "@/lib/works";
 
 const VALUES = [
   {
@@ -25,13 +27,17 @@ const VALUES = [
   },
 ];
 
-const COLLAGE = ["/creatives/sm/01.jpg", "/creatives/sm/05.jpg", "/creatives/sm/09.jpg"];
+const COLLAGE = [
+  creative("cosmo-cocktail-poster-stories-nagarbhavi"),
+  creative("caramel-cheesecake-poster-stories-rajajinagar"),
+  creative("prawn-fry-neer-dosa-poster-stories-nagarbhavi"),
+];
 
 export default function About() {
   return (
     <PageShell>
       <PageHeader
-        eyebrow="About the studio"
+        h1={getRoute("/about").h1}
         lines={["Built for", <>the <span className="accent">scroll.</span></>]}
         intro="The Flaux Media is a creative media and marketing studio in Bengaluru. We help brands stand out through high-quality visuals, strategy-driven campaigns and technology-led execution."
       />
@@ -58,9 +64,9 @@ export default function About() {
         </div>
 
         <div className="relative h-[420px] sm:h-[520px] lg:col-span-6">
-          {COLLAGE.map((src, i) => (
+          {COLLAGE.map((img, i) => (
             <motion.div
-              key={src}
+              key={img.slug}
               className={`absolute ${["left-0 top-6 w-[48%]", "right-0 top-0 w-[44%]", "bottom-0 left-[26%] w-[46%]"][i]}`}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -70,7 +76,7 @@ export default function About() {
               <div
                 className={`overflow-hidden rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.5)] ${["-rotate-3", "rotate-2", "-rotate-1"][i]}`}
               >
-                <img src={src} alt="" loading="lazy" className="aspect-[4/5] w-full object-cover" />
+                <img src={img.thumb} alt={img.alt} width={img.width} height={img.height} loading="lazy" className="aspect-[4/5] w-full object-cover" />
               </div>
             </motion.div>
           ))}

@@ -6,6 +6,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import FloatingNav from "@/components/floating-nav";
+import HeadSync from "@/seo/head-sync";
 import Home from "@/pages/home";
 import About from "@/pages/about";
 import Services from "@/pages/services";
@@ -59,6 +60,7 @@ function App() {
         <MotionConfig reducedMotion="user">
           <Toaster />
           <ScrollToTop />
+          <HeadSync />
           <Router />
           <FloatingNav />
         </MotionConfig>

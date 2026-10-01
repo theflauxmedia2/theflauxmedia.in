@@ -57,7 +57,7 @@ export default function FloatingNav() {
         >
           <div className="flex items-center gap-1 rounded-full border border-white/10 bg-[#161616]/95 p-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
             <Link href="/" aria-label="Home" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-colors hover:bg-white/5">
-              <img src="/logo/logo.png" alt="" className="h-6 w-auto" />
+              <img src="/logo/logo.png" alt="" width={984} height={1105} className="h-6 w-auto" />
             </Link>
             {LINKS.map((link) => {
               const active = isActive(location, link.href);

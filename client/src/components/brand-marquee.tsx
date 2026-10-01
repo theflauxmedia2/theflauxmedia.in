@@ -30,6 +30,8 @@ export default function BrandMarquee({ index = "02" }: { index?: string }) {
               >
                 <img
                   src={brand.logo}
+                  width={brand.width}
+                  height={brand.height}
                   alt={copy === 0 ? brand.name : ""}
                   loading="lazy"
                   className={`max-h-full max-w-full object-contain opacity-60 transition-[opacity,filter] duration-300 hover:opacity-100 ${

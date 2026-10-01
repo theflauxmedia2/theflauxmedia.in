@@ -66,7 +66,7 @@ export default function Testimonials() {
               </blockquote>
               <figcaption className="mt-10 flex items-center gap-4">
                 {t.logo ? (
-                  <img src={t.logo} alt="" className="h-12 w-12 rounded-full bg-white/5 object-contain p-1.5" />
+                  <img src={t.logo} alt="" width={48} height={48} className="h-12 w-12 rounded-full bg-white/5 object-contain p-1.5" />
                 ) : (
                   <span className="flex h-12 w-12 items-center justify-center rounded-full bg-flame font-medium text-ink">
                     {initials}

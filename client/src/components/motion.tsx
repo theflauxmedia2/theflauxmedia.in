@@ -31,7 +31,7 @@ export function Reveal({ delay = 0, y = 16, children, ...rest }: RevealProps) {
 }
 
 type HeadlineProps = {
-  as?: "h1" | "h2" | "h3";
+  as?: "h1" | "h2" | "h3" | "p";
   lines: ReactNode[];
   className?: string;
   delay?: number;

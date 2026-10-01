@@ -23,7 +23,9 @@ export default function ReelCard({ video, index, onOpen, className = "" }: ReelC
       {thumb && (
         <img
           src={thumb}
-          alt=""
+          alt={`${video.title} reel thumbnail`}
+          width={480}
+          height={360}
           loading="lazy"
           decoding="async"
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"

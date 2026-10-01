@@ -2,27 +2,28 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { EASE_OUT, Eyebrow, Headline, Reveal } from "@/components/motion";
+import { creative } from "@/lib/works";
 
 const SERVICES = [
   {
     title: "Graphic Design",
     description: "Visual storytelling that captivates your audience and strengthens your brand presence across every platform.",
     tags: ["Brand identity", "Social creatives", "Menus & print"],
-    image: "/creatives/sm/04.jpg",
+    image: creative("rainbow-layered-cocktail-poster-stories-rajajinagar"),
     href: "/services",
   },
   {
     title: "Social Media Marketing",
     description: "Strategy, content calendars and community management that position you uniquely and connect deeply with your audience.",
     tags: ["Strategy", "Content calendars", "Ad campaigns"],
-    image: "/creatives/sm/02.jpg",
+    image: creative("honey-dew-mocktail-poster-stories-rajajinagar"),
     href: "/services",
   },
   {
     title: "Film & Photography",
     description: "Cinematic reels, brand films and product shoots that elevate your brand's voice and hold attention.",
     tags: ["Reels", "Brand films", "Product shoots"],
-    image: "/creatives/sm/08.jpg",
+    image: creative("sizzler-kairi-cooler-poster-stories-nagarbhavi"),
     href: "/services",
   },
   {
@@ -78,7 +79,7 @@ export default function Services() {
                 </div>
                 {service.image ? (
                   <div className="hidden h-36 w-28 shrink-0 overflow-hidden rounded-xl [clip-path:inset(50%_50%_50%_50%_round_12px)] transition-[clip-path] duration-500 ease-out group-hover:[clip-path:inset(0%_0%_0%_0%_round_12px)] lg:block">
-                    <img src={service.image} alt="" loading="lazy" className="h-full w-full object-cover" />
+                    <img src={service.image.thumb} alt="" width={service.image.width} height={service.image.height} loading="lazy" className="h-full w-full object-cover" />
                   </div>
                 ) : (
                   <span className="hidden h-36 w-28 shrink-0 flex-col justify-between rounded-xl border border-line p-3 transition-colors duration-300 group-hover:border-flame lg:flex">

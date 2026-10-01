@@ -13,7 +13,7 @@ export default function ServiceLinks({ slugs }: { slugs: string[] }) {
             <span>
               <span className="headline block text-3xl text-bone transition-transform duration-500 ease-out group-hover:translate-x-1 sm:text-4xl">
                 {page.name}
-              </span>
+              </span>{" "}
               <span className="mt-1 block text-sm text-mute">{page.h1}</span>
             </span>
             <ArrowUpRight size={22} className="btn-arrow shrink-0 text-flame" />

@@ -1,5 +1,5 @@
 import { motion, useInView, type HTMLMotionProps } from "framer-motion";
-import { useRef, type CSSProperties, type ReactNode } from "react";
+import { Fragment, useRef, type CSSProperties, type ReactNode } from "react";
 
 export const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 
@@ -59,11 +59,15 @@ export function Headline({ as = "h2", lines, className = "", delay = 0, onMount 
     return (
       <Tag className={`headline ${className}`}>
         {lines.map((line, i) => (
-          <span key={i} className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
-            <span className="enter-rise block" style={enterStyle(delay + i * 0.08)}>
-              {line}
+          // The space keeps words apart in the text content (HTML, crawlers, screen readers)
+          <Fragment key={i}>
+            {i > 0 && " "}
+            <span className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
+              <span className="enter-rise block" style={enterStyle(delay + i * 0.08)}>
+                {line}
+              </span>
             </span>
-          </span>
+          </Fragment>
         ))}
       </Tag>
     );
@@ -73,17 +77,20 @@ export function Headline({ as = "h2", lines, className = "", delay = 0, onMount 
   return (
     <Tag className={`headline ${className}`} initial="hidden" whileInView="shown" viewport={{ once: true, margin: "-80px" }}>
       {lines.map((line, i) => (
-        <span key={i} className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
-          <motion.span
-            className="block"
-            variants={{
-              hidden: { y: "105%" },
-              shown: { y: "0%", transition: { duration: 0.9, ease: EASE_OUT, delay: delay + i * 0.08 } },
-            }}
-          >
-            {line}
-          </motion.span>
-        </span>
+        <Fragment key={i}>
+          {i > 0 && " "}
+          <span className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
+            <motion.span
+              className="block"
+              variants={{
+                hidden: { y: "105%" },
+                shown: { y: "0%", transition: { duration: 0.9, ease: EASE_OUT, delay: delay + i * 0.08 } },
+              }}
+            >
+              {line}
+            </motion.span>
+          </span>
+        </Fragment>
       ))}
     </Tag>
   );

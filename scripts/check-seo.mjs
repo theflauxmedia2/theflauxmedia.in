@@ -42,6 +42,18 @@ const descriptions = new Map();
 const internalLinks = new Set();
 
 const pick = (html, re) => html.match(re)?.[1];
+// Words of a fragment's text content: with tags removed, or with each tag replaced by a space.
+// If they differ, two words are glued together across an element boundary (e.g. "Reels thatstop thumbs").
+const wordList = (html, sep) =>
+  html
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<[^>]+>/g, sep)
+    .replace(/&(?:[a-z]+|#x?[0-9a-f]+);/gi, "")
+    .split(/\s+/)
+    .map((w) => w.replace(/[^\p{L}\p{N}]/gu, ""))
+    .filter(Boolean)
+    .join(" ");
+
 const textOf = (html) =>
   html
     .replace(/<script[\s\S]*?<\/script>/g, " ")
@@ -76,6 +88,17 @@ for (const route of routes) {
 
   const words = textOf(body).split(" ").length;
   if (words < 150) fail(route, `only ${words} words of body text in HTML`);
+
+  // Headings (and display headlines styled as <p class="headline">) must keep words apart in the HTML
+  const headings = [
+    ...body.matchAll(/<(h[1-6])\b[^>]*>([\s\S]*?)<\/\1>/g),
+    ...body.matchAll(/<(p)\b[^>]*class="[^"]*\bheadline\b[^"]*"[^>]*>([\s\S]*?)<\/p>/g),
+  ];
+  for (const [, , inner] of headings) {
+    const joined = wordList(inner, "");
+    const spaced = wordList(inner, " ");
+    if (joined !== spaced) fail(route, `heading words run together: "${joined}" (should be "${spaced}")`);
+  }
 
   const jsonBlocks = [...html.matchAll(/<script data-seo type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
   if (jsonBlocks.length < 2) fail(route, "missing JSON-LD");

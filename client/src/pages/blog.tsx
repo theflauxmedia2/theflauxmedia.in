@@ -33,7 +33,7 @@ export function BlogIndex() {
                 <span className="md:col-span-8">
                   <span className="headline block text-4xl text-bone transition-transform duration-500 ease-out group-hover:translate-x-1 sm:text-5xl">
                     {post.h1}
-                  </span>
+                  </span>{" "}
                   <span className="mt-3 block max-w-2xl text-mute">{post.excerpt}</span>
                 </span>
                 <ArrowUpRight size={24} className="btn-arrow text-flame md:col-span-1 md:justify-self-end" />

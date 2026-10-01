@@ -29,7 +29,7 @@ export default function PageHeader({ h1, lines, intro, aside, breadcrumbs }: Pag
           )}
         </div>
         {intro && (
-          <p className="enter mt-10 max-w-2xl text-lg leading-relaxed text-mute sm:text-xl" style={enterStyle(0.35, 12)}>
+          <p className="enter mt-10 max-w-2xl text-lg leading-relaxed text-mute sm:text-xl" style={enterStyle(0.2, 12, { fade: false })}>
             {intro}
           </p>
         )}

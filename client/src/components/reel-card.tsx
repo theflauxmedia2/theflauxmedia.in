@@ -6,9 +6,11 @@ type ReelCardProps = {
   index: number;
   onOpen: () => void;
   className?: string;
+  /** Load the thumbnail eagerly (cards in the first row). */
+  eager?: boolean;
 };
 
-export default function ReelCard({ video, index, onOpen, className = "" }: ReelCardProps) {
+export default function ReelCard({ video, index, onOpen, className = "", eager = false }: ReelCardProps) {
   const thumb = videoThumbnail(video);
 
   return (
@@ -25,7 +27,7 @@ export default function ReelCard({ video, index, onOpen, className = "" }: ReelC
           alt=""
           width={480}
           height={360}
-          loading="lazy"
+          loading={eager ? "eager" : "lazy"}
           decoding="async"
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />

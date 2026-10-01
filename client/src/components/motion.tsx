@@ -10,9 +10,16 @@ export function useOffscreenPause<T extends HTMLElement>() {
   return { ref, paused: !inView };
 }
 
-/** Style for the CSS `.enter` entrance (above the fold), which plays from the pre-rendered HTML before JS loads. */
-export function enterStyle(delay = 0, y = 0): CSSProperties {
-  return { ["--enter-delay" as string]: `${delay}s`, ["--enter-y" as string]: `${y}px` };
+/**
+ * Style for the CSS `.enter` entrance (above the fold), which plays from the pre-rendered HTML before JS loads.
+ * Pass `fade: false` for likely LCP text so it is visible from the first frame and only slides.
+ */
+export function enterStyle(delay = 0, y = 0, { fade = true } = {}): CSSProperties {
+  return {
+    ["--enter-delay" as string]: `${delay}s`,
+    ["--enter-y" as string]: `${y}px`,
+    ...(fade ? {} : { ["--enter-opacity" as string]: 1 }),
+  };
 }
 
 type RevealProps = HTMLMotionProps<"div"> & {

@@ -10,7 +10,7 @@ import Lightbox from "@/components/lightbox";
 import Contact from "@/components/contact";
 import CaseCards from "@/components/case-cards";
 import { CASE_STUDIES } from "@/content/cases";
-import { EASE_OUT } from "@/components/motion";
+import { EASE_OUT, enterStyle } from "@/components/motion";
 import { clientName, creativeSrcSet, useWorks } from "@/lib/works";
 
 type Tab = "reels" | "creatives";
@@ -18,13 +18,20 @@ type Tab = "reels" | "creatives";
 // Group the Stories outlets together so the filter stays short
 const clientGroup = (title: string) => (title.startsWith("Stories") ? "Stories" : clientName(title));
 
-const cardMotion = (i: number) => ({
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-40px" },
-  // Cap the stagger so long grids don't feel slow
-  transition: { duration: 0.7, ease: EASE_OUT, delay: Math.min(i % 4, 3) * 0.06 },
-});
+/** Number of cards in the first row — these load eagerly and animate in CSS so they paint before hydration. */
+const FIRST_ROW = 4;
+
+const cardMotion = (i: number, className = "") =>
+  i < FIRST_ROW
+    ? { className: `enter ${className}`, style: enterStyle(0.45 + i * 0.06, 24) }
+    : {
+        className,
+        initial: { opacity: 0, y: 24 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: "-40px" },
+        // Cap the stagger so long grids don't feel slow
+        transition: { duration: 0.7, ease: EASE_OUT, delay: Math.min(i % 4, 3) * 0.06 },
+      };
 
 export default function OurWork() {
   const { videos, creatives, loading } = useWorks();
@@ -70,7 +77,7 @@ export default function OurWork() {
                   />
                 )}
                 <span className="relative">{t.label}</span>
-                <span className="relative font-mono text-xs opacity-80">{t.count}</span>
+                <span className="relative font-mono text-xs">{t.count}</span>
               </button>
             ))}
           </div>
@@ -105,14 +112,14 @@ export default function OurWork() {
           <div key={`reels-${client}`} className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
             {filteredVideos.map((video, i) => (
               <motion.div key={video.link} {...cardMotion(i)}>
-                <ReelCard video={video} index={videos.indexOf(video)} onOpen={() => setVideoIndex(i)} />
+                <ReelCard video={video} index={videos.indexOf(video)} eager={i < FIRST_ROW} onOpen={() => setVideoIndex(i)} />
               </motion.div>
             ))}
           </div>
         ) : (
           <div key="creatives" className="columns-2 gap-3 sm:gap-4 lg:columns-3">
             {creatives.map((creative, i) => (
-              <motion.div key={creative.image} className="mb-3 break-inside-avoid sm:mb-4" {...cardMotion(i)}>
+              <motion.div key={creative.image} {...cardMotion(i, "mb-3 break-inside-avoid sm:mb-4")}>
                 <button
                   type="button"
                   onClick={() => setImageIndex(i)}
@@ -126,7 +133,7 @@ export default function OurWork() {
                     alt={creative.alt}
                     width={creative.width}
                     height={creative.height}
-                    loading="lazy"
+                    loading={i < FIRST_ROW ? "eager" : "lazy"}
                     decoding="async"
                     className="w-full transition-transform duration-700 ease-out group-hover:scale-105"
                   />

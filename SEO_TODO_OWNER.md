@@ -27,7 +27,12 @@ If you'd rather keep `www` as primary, change `SITE_URL` in `client/src/lib/site
 4. **Listings** with identical name, phone and website: Justdial, Sulekha, IndiaMART, Bing Places, Apple Business Connect, Clutch, GoodFirms, Behance, LinkedIn.
 5. Ask client websites you've built to add a "Designed by The Flaux Media" footer link.
 
-## Not yet done in code (SEO brief phases 5–6)
-- Re-encode creatives to WebP (≤250 KB at 1080px + 540px `srcset`) with descriptive filenames; slugs already exist in `client/src/data/works.json`.
-- Lighthouse (mobile) on `/`, `/our-work` and one service page; fix flagged issues.
-- Final verification pass and PR summary. Re-run checks any time with `npm run build && npm run check:seo`.
+## Performance status (Lighthouse mobile, local build)
+| Page | Perf | A11y | Best practices | SEO |
+|---|---|---|---|---|
+| `/` | 87 | 100 | 100 | 100 |
+| `/our-work` | 97 | 100 | 100 | 100 |
+| `/services/social-media-marketing-bangalore` | 98 | 100 | 100 | 100 |
+
+Remaining headroom on `/` (bigger jobs, optional): code-split the 167 KB JS bundle (e.g. lazy-load the lightbox/framer-motion below the fold) and self-host a subset of Bricolage Grotesque (128 KB variable font).
+Re-run checks any time with `npm run build && npm run check:seo`.

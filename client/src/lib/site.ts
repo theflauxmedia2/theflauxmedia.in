@@ -1,4 +1,4 @@
-export const SITE_URL = "https://theflauxmedia.in";
+export const SITE_URL = "https://www.theflauxmedia.in";
 export const SITE_NAME = "The Flaux Media";
 
 // TODO(owner): switch to hello@theflauxmedia.in once the domain mailbox exists — this is the only place to change it.

@@ -1,11 +1,7 @@
 # SEO — things only the owner can do
 
-## ⚠️ Before deploying: fix the primary domain
-Right now `theflauxmedia.in` redirects (308) to `www.theflauxmedia.in` (Vercel → Project → Domains).
-The site's canonicals point at **`https://theflauxmedia.in`** (no www), as the SEO brief asked.
-In Vercel → Domains: make `theflauxmedia.in` the primary domain and set `www.theflauxmedia.in` to redirect to it.
-(We did **not** add a www→apex rule in `vercel.json` — combined with the current setting it would loop.)
-If you'd rather keep `www` as primary, change `SITE_URL` in `client/src/lib/site.ts` instead.
+## Primary domain
+The main address is **`https://www.theflauxmedia.in`** — it matches the existing Vercel setup, where `theflauxmedia.in` redirects (308) to `www`. All canonicals, the sitemap and schema use `www`. No Vercel change needed.
 
 `theflauxmedia-in.vercel.app` is publicly reachable; `vercel.json` now sends `X-Robots-Tag: noindex` for that host.
 
@@ -21,7 +17,7 @@ If you'd rather keep `www` as primary, change `SITE_URL` in `client/src/lib/site
 - `/team` redirects to `/about` until real names and roles are provided.
 
 ## Off-site tasks
-1. **Google Search Console** (domain property): submit `https://theflauxmedia.in/sitemap.xml`; request indexing for `/`, `/services`, `/our-work`, `/restaurant-marketing-bangalore`.
+1. **Google Search Console** (domain property): submit `https://www.theflauxmedia.in/sitemap.xml`; request indexing for `/`, `/services`, `/our-work`, `/restaurant-marketing-bangalore`.
 2. **Google Business Profile**: decide address vs service-area business (show the address only for a staffed studio). Primary category "Marketing agency" or "Social media agency"; add services and service areas (Bannerghatta Road, Gottigere, JP Nagar, Jayanagar, BTM Layout, Banashankari…); post real photos/videos weekly.
 3. **Reviews**: ask past clients (Stories outlets, Madhuram, Macaw, Moai, Global Computers) via the GBP review link — aim for 4–6 a month. No incentives, never fake reviews.
 4. **Listings** with identical name, phone and website: Justdial, Sulekha, IndiaMART, Bing Places, Apple Business Connect, Clutch, GoodFirms, Behance, LinkedIn.

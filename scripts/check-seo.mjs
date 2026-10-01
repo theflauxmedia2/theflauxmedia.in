@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist/public");
 const routes = JSON.parse(fs.readFileSync(path.join(root, "dist/seo-routes.json"), "utf8"));
-const SITE = "https://theflauxmedia.in";
+const SITE = "https://www.theflauxmedia.in";
 
 const TYPES = { ".html": "text/html", ".xml": "application/xml", ".txt": "text/plain", ".js": "text/javascript", ".css": "text/css" };
 

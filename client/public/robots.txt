@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://theflauxmedia.in/sitemap.xml
+Sitemap: https://www.theflauxmedia.in/sitemap.xml

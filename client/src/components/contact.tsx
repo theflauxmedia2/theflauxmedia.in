@@ -1,50 +1,56 @@
-import { Mail, Phone, Instagram, Linkedin, MessageCircle } from "lucide-react";
+import { ArrowUpRight, Instagram, MessageCircle, Phone } from "lucide-react";
+import { Link } from "wouter";
+import { Eyebrow, Headline, Reveal } from "@/components/motion";
+import { CONTACT } from "@/lib/site";
 
+/** Closing call-to-action used at the bottom of pages. */
 export default function Contact() {
   return (
-    <section id="contact" className="py-16 sm:py-20 lg:py-24 bg-[var(--flaux-black)]">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="section-animate">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[var(--flaux-white)] mb-6 sm:mb-8 leading-tight">
-              Ready to Transform Your Brand?
-            </h2>
-            <p className="text-lg sm:text-xl text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed">
-              Let's discuss how we can help you achieve your creative and business goals. Get in touch with our team today.
-            </p>
-            
-            <div className="flex flex-col gap-4 sm:gap-6 justify-center items-center max-w-lg mx-auto">
-              <a 
-                href="mailto:theflauxmedia@gmail.com"
-                className="w-full sm:w-auto inline-flex items-center justify-center bg-[var(--flaux-orange)] text-[var(--flaux-white)] px-6 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 font-medium text-sm sm:text-base"
-              >
-                <Mail className="mr-2 sm:mr-3" size={18} />
-                <span>theflauxmedia@gmail.com</span>
-              </a>
-              <a 
-                href="tel:+91-9019850972"
-                className="w-full sm:w-auto inline-flex items-center justify-center bg-[var(--flaux-black)] border border-[var(--flaux-orange)] text-[var(--flaux-orange)] px-6 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[var(--flaux-orange)] hover:text-[var(--flaux-white)] transition-all duration-300 transform hover:scale-105 font-medium text-sm sm:text-base"
-              >
-                <Phone className="mr-2 sm:mr-3" size={18} />
-                <span>+91-9019850972</span>
-              </a>
-            </div>
-            
-            <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-[var(--flaux-light-gray)]">
-              <div className="flex justify-center space-x-6 sm:space-x-8">
-                <a href="https://wa.me/919019850972" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-gray-400 hover:text-[var(--flaux-orange)] transition-colors duration-300 p-2">
-                  <MessageCircle size={24} className="sm:w-8 sm:h-8" />
-                </a>
-                <a href="https://instagram.com/theflauxmedia" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-gray-400 hover:text-[var(--flaux-orange)] transition-colors duration-300 p-2">
-                  <Instagram size={24} className="sm:w-8 sm:h-8" />
-                </a>
-                <a href="#" className="text-gray-400 hover:text-[var(--flaux-orange)] transition-colors duration-300 p-2" aria-label="LinkedIn">
-                  <Linkedin size={24} className="sm:w-8 sm:h-8" />
-                </a>
-              </div>
-            </div>
+    <section id="contact" className="relative overflow-hidden py-28 sm:py-40">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -bottom-40 left-1/2 h-[480px] w-[900px] -translate-x-1/2 bg-[radial-gradient(closest-side,rgba(247,99,0,0.15),transparent)]"
+      />
+      <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+        <Eyebrow className="mb-8">Start a project</Eyebrow>
+        <Headline
+          className="text-[15vw] text-bone sm:text-8xl lg:text-[9rem]"
+          lines={["Let's make", <>something people</>, <span className="accent">stop for.</span>]}
+        />
+
+        <Reveal delay={0.2} className="mt-14 flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="eyebrow mb-3">Write to us</p>
+            <a
+              href={`mailto:${CONTACT.email}`}
+              className="link-underline headline break-all text-3xl text-bone sm:text-5xl lg:text-6xl"
+            >
+              {CONTACT.email}
+            </a>
           </div>
-        </div>
+
+          <div className="flex flex-wrap gap-3">
+            <Link href="/contact" className="btn btn-primary group">
+              Send a brief
+              <ArrowUpRight size={16} className="btn-arrow" />
+            </Link>
+            <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
+              <MessageCircle size={16} /> WhatsApp
+            </a>
+            <a href={CONTACT.phoneHref} className="btn btn-ghost" aria-label={`Call ${CONTACT.phoneDisplay}`}>
+              <Phone size={16} /> Call
+            </a>
+            <a
+              href={CONTACT.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-ghost !px-0 w-12"
+              aria-label="Instagram"
+            >
+              <Instagram size={18} />
+            </a>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

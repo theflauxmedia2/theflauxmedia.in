@@ -1,111 +1,107 @@
-import { ArrowLeft, Users, Target, Award, Globe } from "lucide-react";
-import { Link } from "wouter";
+import { motion } from "framer-motion";
+import PageShell from "@/components/page-shell";
+import PageHeader from "@/components/page-header";
+import Approach from "@/components/about";
+import BrandMarquee from "@/components/brand-marquee";
+import Contact from "@/components/contact";
+import { EASE_OUT, Eyebrow, Headline, Reveal } from "@/components/motion";
+
+const VALUES = [
+  {
+    title: "Collaboration",
+    description: "We believe the best ideas come from working together, combining diverse perspectives and expertise.",
+  },
+  {
+    title: "Purpose-Driven",
+    description: "Every project we take on has a clear purpose and measurable impact on our clients' success.",
+  },
+  {
+    title: "Craft",
+    description: "We set high standards for ourselves — every frame, edit and pixel is considered before it ships.",
+  },
+  {
+    title: "Curiosity",
+    description: "We stay close to platforms and trends, and push ideas until they feel fresh rather than familiar.",
+  },
+];
+
+const COLLAGE = ["/creatives/sm/01.jpg", "/creatives/sm/05.jpg", "/creatives/sm/09.jpg"];
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-[var(--flaux-black)] text-[var(--flaux-white)]">
-      {/* Header */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Link href="/" className="inline-flex items-center text-[var(--flaux-orange)] hover:text-white transition-colors duration-300 mb-8">
-          <ArrowLeft size={20} className="mr-2" />
-          Back to Home
-        </Link>
-        
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-8 leading-tight">
-            About <span className="gradient-text">The Flaux Media</span>
-          </h1>
-          
-          <p className="text-xl sm:text-2xl text-gray-400 mb-12 leading-relaxed">
-            We are a creative powerhouse that transforms brands through strategic design, innovative technology, and compelling storytelling.
-          </p>
-        </div>
-      </div>
+    <PageShell>
+      <PageHeader
+        eyebrow="About the studio"
+        lines={["Built for", <>the <span className="accent">scroll.</span></>]}
+        intro="The Flaux Media is a creative media and marketing studio in Bengaluru. We help brands stand out through high-quality visuals, strategy-driven campaigns and technology-led execution."
+      />
 
-      {/* Our Story */}
-      <section className="py-16 sm:py-20 lg:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-black mb-8">Our Story</h2>
-            <div className="space-y-6 text-lg leading-relaxed text-gray-300">
+      {/* Story */}
+      <section className="mx-auto grid max-w-[1400px] grid-cols-1 gap-14 px-5 py-16 sm:px-8 lg:grid-cols-12 lg:gap-10 lg:px-12">
+        <div className="lg:col-span-6">
+          <Eyebrow index="01" className="mb-6">What defines us</Eyebrow>
+          <Reveal>
+            <p className="headline text-4xl text-bone sm:text-5xl">
+              Every brand has a story worth telling. We make sure it's <span className="accent">seen.</span>
+            </p>
+            <div className="mt-8 max-w-xl space-y-5 text-lg leading-relaxed text-mute">
               <p>
-                Founded in 2025, The Flaux Media emerged from a simple belief: every brand has a unique story worth telling. What started as a small creative studio has grown into a full-service digital agency with over 1000 specialists worldwide.
+                Through powerful storytelling, innovative design, and technology-driven execution, we help brands stand
+                out and connect with their audience in meaningful ways.
               </p>
               <p>
-                Our journey began with a focus on visual identity and has evolved to encompass every aspect of digital transformation. From startups to Fortune 500 companies, we've helped brands discover their voice and amplify their message across all channels.
-              </p>
-              <p>
-                Today, we're proud to be at the forefront of creative innovation, combining cutting-edge technology with human-centered design to create experiences that not only look stunning but drive real business results.
+                Our mission is to craft digital experiences that inspire action, build trust, and deliver measurable
+                impact — turning ideas into visuals that move people and brands forward.
               </p>
             </div>
-          </div>
+          </Reveal>
+        </div>
+
+        <div className="relative h-[420px] sm:h-[520px] lg:col-span-6">
+          {COLLAGE.map((src, i) => (
+            <motion.div
+              key={src}
+              className={`absolute ${["left-0 top-6 w-[48%]", "right-0 top-0 w-[44%]", "bottom-0 left-[26%] w-[46%]"][i]}`}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.9, ease: EASE_OUT, delay: i * 0.12 }}
+            >
+              <div
+                className={`overflow-hidden rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.5)] ${["-rotate-3", "rotate-2", "-rotate-1"][i]}`}
+              >
+                <img src={src} alt="" loading="lazy" className="aspect-[4/5] w-full object-cover" />
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
-      {/* Our Values */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-[var(--flaux-gray)]">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-black mb-12 text-center">Our Values</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                {
-                  icon: Users,
-                  title: "Collaboration",
-                  description: "We believe the best ideas come from working together, combining diverse perspectives and expertise."
-                },
-                {
-                  icon: Target,
-                  title: "Purpose-Driven",
-                  description: "Every project we take on has a clear purpose and measurable impact on our clients' success."
-                },
-                {
-                  icon: Award,
-                  title: "Excellence",
-                  description: "We set the highest standards for ourselves and deliver nothing less than exceptional work."
-                },
-                {
-                  icon: Globe,
-                  title: "Innovation",
-                  description: "We stay ahead of trends and push boundaries to create solutions that shape the future."
-                }
-              ].map((value, index) => (
-                <div key={value.title} className="text-center">
-                  <div className="w-16 h-16 bg-[var(--flaux-orange)] rounded-full flex items-center justify-center mx-auto mb-6">
-                    <value.icon size={32} className="text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-4">{value.title}</h3>
-                  <p className="text-gray-400">{value.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+      {/* Values */}
+      <section className="mx-auto max-w-[1400px] px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
+        <Eyebrow index="02" className="mb-6">What we value</Eyebrow>
+        <Headline className="mb-14 text-6xl text-bone sm:text-7xl" lines={[<>Four things we <span className="accent">won't</span> compromise on.</>]} />
+        <ul className="grid grid-cols-1 border-t border-line sm:grid-cols-2">
+          {VALUES.map((value, i) => (
+            <motion.li
+              key={value.title}
+              className="border-b border-line py-10 sm:odd:border-r sm:odd:pr-10 sm:even:pl-10"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.7, ease: EASE_OUT, delay: (i % 2) * 0.08 }}
+            >
+              <span className="eyebrow !text-flame">0{i + 1}</span>
+              <h3 className="headline mt-4 text-4xl text-bone">{value.title}</h3>
+              <p className="mt-3 max-w-md leading-relaxed text-mute">{value.description}</p>
+            </motion.li>
+          ))}
+        </ul>
       </section>
 
-      {/* Team Stats */}
-      <section className="py-16 sm:py-20 lg:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl sm:text-4xl font-black mb-12">By the Numbers</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                { number: "1000+", label: "Team Members" },
-                { number: "500+", label: "Projects Completed" },
-                { number: "50+", label: "Countries Served" },
-                { number: "99%", label: "Client Satisfaction" }
-              ].map((stat, index) => (
-                <div key={stat.label} className="text-center">
-                  <div className="text-4xl sm:text-5xl font-black text-[var(--flaux-orange)] mb-2">
-                    {stat.number}
-                  </div>
-                  <p className="text-gray-400">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+      <Approach index="03" />
+      <BrandMarquee index="04" />
+      <Contact />
+    </PageShell>
   );
 }

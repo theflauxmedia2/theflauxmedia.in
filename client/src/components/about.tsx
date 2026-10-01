@@ -1,61 +1,66 @@
-import { ArrowRight } from "lucide-react";
-import { Link } from "wouter";
-import { useCursorArrow } from "@/hooks/use-cursor-arrow";
+import { motion } from "framer-motion";
+import { EASE_OUT, Eyebrow, Reveal } from "@/components/motion";
 
-export default function About() {
-  const { arrowRef, containerRef } = useCursorArrow();
+export const PROCESS = [
+  {
+    title: "Discover",
+    copy: "We dig into your brand, your audience and what's already working — then agree on what success looks like.",
+  },
+  {
+    title: "Create",
+    copy: "Concepts, scripts and shoot plans, then production: reels, films, photography and design made in-house.",
+  },
+  {
+    title: "Refine",
+    copy: "Sharp edits, colour and sound, with quick feedback rounds so nothing ships until it feels right.",
+  },
+  {
+    title: "Grow",
+    copy: "We publish, measure and iterate — doubling down on what moves people and dropping what doesn't.",
+  },
+];
 
+/** Studio belief statement + four-step process. */
+export default function About({ index = "04" }: { index?: string }) {
   return (
-    <section id="about" className="py-16 sm:py-20 lg:py-24 bg-[var(--flaux-black)]">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left Side - Interactive Arrow */}
-          <div className="flex justify-center lg:justify-start order-2 lg:order-1">
-            <div 
-              ref={containerRef}
-              className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 flex items-center justify-center"
+    <section id="about" className="relative py-24 sm:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+        <Eyebrow index={index} className="mb-10">How we work</Eyebrow>
+
+        <Reveal>
+          <p className="headline max-w-5xl text-4xl text-bone sm:text-6xl lg:text-7xl">
+            Creativity and strategy go <span className="accent">hand in hand.</span>{" "}
+            <span className="text-mute">
+              We turn ideas into visuals that move people — and move brands forward.
+            </span>
+          </p>
+        </Reveal>
+
+        <ol className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-3xl border border-line bg-line sm:mt-24 sm:grid-cols-2 lg:grid-cols-4">
+          {PROCESS.map((step, i) => (
+            <motion.li
+              key={step.title}
+              className="group relative flex min-h-[280px] flex-col bg-ink p-7 transition-colors duration-500 hover:bg-ink-raised sm:p-8"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.8, ease: EASE_OUT, delay: i * 0.08 }}
             >
-              <div ref={arrowRef} className="cursor-arrow">
-                <ArrowRight className="text-[140px] sm:text-[160px] lg:text-[200px] text-[var(--flaux-orange)]" size={200} />
+              <span className="eyebrow">Step 0{i + 1}</span>
+              <div className="mt-14">
+                <h3 className="headline text-4xl text-bone sm:text-5xl">
+                  {step.title}
+                  <span className="text-flame">.</span>
+                </h3>
+                <p className="mt-4 leading-relaxed text-mute">{step.copy}</p>
               </div>
-              {/* Background grid for depth */}
-              <div className="absolute inset-0 opacity-10">
-                <div className="grid grid-cols-6 grid-rows-6 sm:grid-cols-8 sm:grid-rows-8 h-full w-full gap-1">
-                  {Array.from({ length: 64 }).map((_, i) => (
-                    <div key={i} className="bg-[var(--flaux-light-gray)] rounded-full"></div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Right Side - Content */}
-          <div className="section-animate order-1 lg:order-2 text-center lg:text-left">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[var(--flaux-white)] mb-6 sm:mb-8 leading-tight">
-              What defines us
-            </h2>
-            <div className="space-y-4 sm:space-y-6">
-              <p className="text-lg sm:text-xl lg:text-2xl font-bold text-[var(--flaux-white)] leading-relaxed">
-                At The Flaux Media, we believe that creativity and strategy go hand in hand.
-              </p>
-              <p className="text-base sm:text-lg text-gray-400 leading-relaxed">
-                Through powerful storytelling, innovative design, and technology-driven execution, we help brands stand out and connect with their audience in meaningful ways.
-              </p>
-              <p className="text-base sm:text-lg text-gray-400 leading-relaxed">
-                Our mission is to craft digital experiences that inspire action, build trust, and deliver measurable impact — turning ideas into visuals that move people and brands forward.
-              </p>
-              <div className="pt-4 m-4 mb-2 sm:pt-6">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center bg-[var(--flaux-black)] border border-[var(--flaux-orange)] text-[var(--flaux-orange)] px-6 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[var(--flaux-orange)] hover:text-[var(--flaux-white)] transition-all duration-300 transform hover:scale-105 font-medium text-sm sm:text-base"
-                >
-                  <span className="mr-2">Dive Into Our Culture</span>
-                  <ArrowRight size={18} className="sm:w-5 sm:h-5" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
+              <span
+                aria-hidden
+                className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-flame transition-transform duration-500 ease-out group-hover:scale-x-100"
+              />
+            </motion.li>
+          ))}
+        </ol>
       </div>
     </section>
   );

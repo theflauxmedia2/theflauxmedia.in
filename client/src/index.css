@@ -2,58 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom Cursor */
-
 :root {
-  --background: hsl(0, 0%, 100%);
-  --foreground: hsl(0, 0%, 4%);
-  --muted: hsl(0, 0%, 96%);
-  --muted-foreground: hsl(0, 0%, 45%);
-  --popover: hsl(0, 0%, 100%);
-  --popover-foreground: hsl(0, 0%, 4%);
-  --card: hsl(0, 0%, 100%);
-  --card-foreground: hsl(0, 0%, 4%);
-  --border: hsl(0, 0%, 90%);
-  --input: hsl(0, 0%, 90%);
-  --primary: hsl(207, 90%, 54%);
-  --primary-foreground: hsl(211, 100%, 99%);
-  --secondary: hsl(0, 0%, 96%);
-  --secondary-foreground: hsl(0, 0%, 10%);
-  --accent: hsl(0, 0%, 96%);
-  --accent-foreground: hsl(0, 0%, 10%);
-  --destructive: hsl(0, 84%, 60%);
-  --destructive-foreground: hsl(0, 0%, 98%);
-  --ring: hsl(0, 0%, 4%);
-  --radius: 0.5rem;
-  
-  /* Flaux Media Brand Colors */
-  --flaux-black: hsl(0, 0%, 4%);
-  --flaux-white: hsl(0, 0%, 100%);
-  --flaux-orange: hsl(21, 100%, 48%);
-  --flaux-gray: hsl(0, 0%, 10%);
-  --flaux-light-gray: hsl(0, 0%, 20%);
-}
+  /* Flaux Media brand */
+  --ink: #0a0a0a;
+  --ink-raised: #121212;
+  --ink-high: #1b1b1b;
+  --line: rgba(242, 238, 232, 0.1);
+  --bone: #f2eee8;
+  --mute: #8f8a84;
+  --flame: #f76300;
+  --flame-deep: #d65500;
 
-.dark {
-  --background: hsl(0, 0%, 4%);
-  --foreground: hsl(0, 0%, 98%);
-  --muted: hsl(0, 0%, 15%);
-  --muted-foreground: hsl(0, 0%, 65%);
-  --popover: hsl(0, 0%, 4%);
-  --popover-foreground: hsl(0, 0%, 98%);
-  --card: hsl(0, 0%, 4%);
-  --card-foreground: hsl(0, 0%, 98%);
-  --border: hsl(0, 0%, 15%);
-  --input: hsl(0, 0%, 15%);
-  --primary: hsl(207, 90%, 54%);
-  --primary-foreground: hsl(211, 100%, 99%);
-  --secondary: hsl(0, 0%, 15%);
-  --secondary-foreground: hsl(0, 0%, 98%);
-  --accent: hsl(0, 0%, 15%);
-  --accent-foreground: hsl(0, 0%, 98%);
-  --destructive: hsl(0, 63%, 31%);
-  --destructive-foreground: hsl(0, 0%, 98%);
-  --ring: hsl(0, 0%, 84%);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+  /* Legacy aliases kept for shared UI primitives */
+  --flaux-black: var(--ink);
+  --flaux-white: var(--bone);
+  --flaux-orange: var(--flame);
+  --flaux-gray: var(--ink-raised);
+  --flaux-light-gray: var(--ink-high);
+
+  /* shadcn/ui tokens (dark) */
+  --background: var(--ink);
+  --foreground: var(--bone);
+  --muted: var(--ink-high);
+  --muted-foreground: var(--mute);
+  --popover: var(--ink-raised);
+  --popover-foreground: var(--bone);
+  --card: var(--ink-raised);
+  --card-foreground: var(--bone);
+  --border: var(--line);
+  --input: var(--line);
+  --primary: var(--flame);
+  --primary-foreground: var(--ink);
+  --secondary: var(--ink-high);
+  --secondary-foreground: var(--bone);
+  --accent: var(--ink-high);
+  --accent-foreground: var(--bone);
+  --destructive: hsl(0, 72%, 51%);
+  --destructive-foreground: var(--bone);
+  --ring: var(--flame);
+  --radius: 0.75rem;
 }
 
 @layer base {
@@ -61,291 +51,196 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
-    @apply font-sans antialiased bg-[var(--flaux-black)] text-[var(--flaux-white)] overflow-x-hidden;
-    font-family: 'Inter', sans-serif;
+    @apply antialiased bg-ink text-bone font-sans overflow-x-hidden;
+    font-optical-sizing: auto;
+  }
+
+  ::selection {
+    background: var(--flame);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--flame);
+    outline-offset: 3px;
   }
 
   /* Prevent background scroll when modals are open */
   body.modal-open {
     overflow: hidden;
     overscroll-behavior: contain;
-    touch-action: none;
-  }
-
-  html {
-    scroll-behavior: smooth;
   }
 }
 
 @layer components {
-  .flaux-brand-colors {
-    --flaux-black: hsl(0, 0%, 4%);
-    --flaux-white: hsl(0, 0%, 100%);
-    --flaux-orange: hsl(21, 100%, 48%);
-    --flaux-gray: hsl(0, 0%, 10%);
-    --flaux-light-gray: hsl(0, 0%, 20%);
+  /* Condensed poster headline */
+  .headline {
+    font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    font-stretch: 78%;
+    letter-spacing: -0.022em;
+    line-height: 0.92;
+    text-wrap: balance;
   }
 
-  .gradient-text {
-    background: linear-gradient(135deg, var(--flaux-white) 0%, var(--flaux-orange) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  /* Editorial italic accent word inside headlines */
+  .accent {
+    font-family: "Instrument Serif", ui-serif, Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    font-stretch: 100%;
+    letter-spacing: -0.01em;
+    color: var(--flame);
+    padding-right: 0.06em;
   }
 
-  .marquee-container {
-    overflow: hidden;
-    white-space: nowrap;
+  /* Small mono label above sections */
+  .eyebrow {
+    font-family: "Geist Mono", ui-monospace, monospace;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mute);
   }
 
-  .marquee-content {
-    display: inline-block;
-    animation: marquee 55s linear infinite; /* slowed down */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full font-medium select-none;
+    min-height: 48px;
+    padding: 0 1.5rem;
+    transition:
+      transform 160ms var(--ease-out),
+      background-color 200ms ease,
+      color 200ms ease,
+      border-color 200ms ease;
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
+  .btn-primary {
+    background: var(--flame);
+    color: var(--ink);
+  }
+  .btn-ghost {
+    border: 1px solid var(--line);
+    color: var(--bone);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+      background: var(--bone);
+    }
+    .btn-ghost:hover {
+      border-color: var(--bone);
+    }
   }
 
-  .section-animate {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 0.8s ease;
+  /* Arrow nudges right on parent hover */
+  .btn .btn-arrow,
+  .group .btn-arrow {
+    transition: transform 200ms var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn:hover .btn-arrow,
+    .group:hover .btn-arrow {
+      transform: translateX(3px);
+    }
   }
 
-  .section-animate.visible {
-    opacity: 1;
-    transform: translateY(0);
+  /* Underline that draws in from the left */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 300ms var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .link-underline:hover {
+      background-size: 100% 1px;
+    }
   }
 
-  .card-hover {
-    transition: all 0.3s ease;
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: marquee var(--marquee-duration, 40s) linear infinite;
+  }
+  .marquee-track[data-reverse="true"] {
+    animation-direction: reverse;
   }
 
-  .card-hover:hover {
-    transform: translateY(-5px) scale(1.02);
+  .drift-up,
+  .drift-down {
+    will-change: transform;
   }
-  /* === Reveal  Animation Fixes === */
+  .drift-up {
+    animation: drift-up var(--drift-duration, 60s) linear infinite;
+  }
+  .drift-down {
+    animation: drift-up var(--drift-duration, 60s) linear infinite reverse;
+  }
 
+  /* Looping animations stop while their section is off-screen */
+  [data-paused="true"] .marquee-track,
+  [data-paused="true"] .drift-up,
+  [data-paused="true"] .drift-down {
+    animation-play-state: paused;
+  }
+
+  /* Reveal footer layer behind the page panel */
   .footer-takeover {
     position: fixed;
     inset: 0;
     z-index: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
     height: 100vh;
     max-height: 100dvh;
     overflow: hidden;
-  }
-
-.section-animate {
-  content-visibility: auto;
-  contain-intrinsic-size: 500px;
-}
-
-  .navbar-transition {
-    transition: all 0.3s ease;
-  }
-
-  .floating-navbar-enter {
-    animation: slideUpFade 0.4s ease-out;
-  }
-
-  .floating-navbar-exit {
-    animation: slideDownFade 0.3s ease-in;
-  }
-
-
-
-  .cursor-arrow {
-    transition: transform 0.3s ease;
-  }
-
-  .text-stroke {
-    -webkit-text-stroke: 2px var(--flaux-orange);
-    -webkit-text-fill-color: transparent;
-  }
-
-  .footer-takeover {
-    background: radial-gradient(ellipse at center, hsl(0, 0%, 12%) 0%, var(--flaux-black) 70%);
-    backdrop-filter: none;
-  }
-
-  .footer-takeover-text {
-    text-shadow: 0 0 30px rgba(247, 99, 0, 0.3);
-    animation: pulseGlow 3s ease-in-out infinite;
+    background: radial-gradient(ellipse at 50% 120%, rgba(247, 99, 0, 0.22) 0%, transparent 55%), var(--ink);
   }
 }
 
 @layer utilities {
-  .stagger-1 { animation-delay: 0.1s; }
-  .stagger-2 { animation-delay: 0.2s; }
-  .stagger-3 { animation-delay: 0.3s; }
-  .stagger-4 { animation-delay: 0.4s; }
-  
-  .delay-100 { animation-delay: 100ms; }
-  .delay-200 { animation-delay: 200ms; }
-  .delay-300 { animation-delay: 300ms; }
-  .delay-400 { animation-delay: 400ms; }
-  .delay-500 { animation-delay: 500ms; }
-
-  /* Mobile-optimized animations */
-  @media (max-width: 768px) {
-    .section-animate {
-      transform: translateY(20px);
-    }
-    
-    .card-hover:hover {
-      transform: translateY(-2px) scale(1.01);
-    }
-    
-    .animate-fadeInUp {
-      animation-duration: 0.4s;
-    }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
-
-  /* Reduced motion for accessibility */
-  @media (prefers-reduced-motion: reduce) {
-    .section-animate,
-    .card-hover,
-    .animate-fadeInUp,
-    .animate-fadeInLeft,
-    .animate-scaleIn,
-    .cursor-arrow,
-    .custom-cursor {
-      animation: none !important;
-      transform: none !important;
-      transition: none !important;
-    }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-100%); }
-}
-
-.animate-marquee {
-  animation: marquee 30s linear infinite;
-}
-
-@keyframes fadeInUp {
-  0% { opacity: 0; transform: translateY(30px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInLeft {
-  0% { opacity: 0; transform: translateX(-30px); }
-  100% { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes fadeInRight {
-  0% { opacity: 0; transform: translateX(30px); }
-  100% { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes scaleIn {
-  0% { opacity: 0; transform: scale(0.8); }
-  100% { opacity: 1; transform: scale(1); }
-}
-
-@keyframes pulseGlow {
-  0%, 100% { 
-    text-shadow: 0 0 30px rgba(247, 99, 0, 0.3);
-    transform: scale(1);
+  from {
+    transform: translate3d(0, 0, 0);
   }
-  50% { 
-    text-shadow: 0 0 50px rgba(247, 99, 0, 0.5);
-    transform: scale(1.01);
+  to {
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
-@keyframes slideUpFade {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
+@keyframes drift-up {
+  from {
+    transform: translate3d(0, 0, 0);
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
+  to {
+    transform: translate3d(0, -50%, 0);
   }
 }
 
-@keyframes popIn {
-  0% {
-    opacity: 0;
-    transform: translateY(30px) scale(0.8);
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-  60% {
-    opacity: 1;
-    transform: translateY(-5px) scale(1.05);
+  .marquee-track,
+  .drift-up,
+  .drift-down {
+    animation: none;
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes slideDownFade {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-}
-
-@keyframes wipeUp {
-  0% {
-    opacity: 0;
-    clip-path: inset(100% 0 0 0);
-  }
-  60% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-    clip-path: inset(0 0 0 0);
-  }
-}
-.wipe-up-animate {
-  animation: wipeUp 0.6s cubic-bezier(0.4,0,0.2,1) both;
-}
-
-@keyframes wipeDown {
-  0% {
-    opacity: 1;
-    clip-path: inset(0 0 0 0);
-  }
-  40% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    clip-path: inset(100% 0 0 0);
-  }
-}
-.wipe-down-animate {
-  animation: wipeDown 0.6s cubic-bezier(0.4,0,0.2,1) both;
-}
-
-.animate-fadeInUp {
-  animation: fadeInUp 0.6s ease-out;
-}
-
-.animate-fadeInLeft {
-  animation: fadeInLeft 0.8s ease-out;
-}
-
-.animate-fadeInRight {
-  animation: fadeInRight 0.8s ease-out;
-}
-
-.animate-scaleIn {
-  animation: scaleIn 0.5s ease-out;
-}
-
-.animate-bounce-slow {
-  animation: bounce 2s infinite;
 }

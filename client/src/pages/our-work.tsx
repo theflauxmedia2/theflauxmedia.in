@@ -1,361 +1,167 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { X, Play, ExternalLink } from "lucide-react";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
-import FooterStrip from "@/components/footer-strip";
+import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import { Expand } from "lucide-react";
+import PageShell from "@/components/page-shell";
+import PageHeader from "@/components/page-header";
+import ReelCard from "@/components/reel-card";
+import VideoLightbox from "@/components/video-lightbox";
+import Lightbox from "@/components/lightbox";
+import Contact from "@/components/contact";
+import { EASE_OUT } from "@/components/motion";
+import { clientName, useWorks } from "@/lib/works";
 
-interface VideoItem {
-  title: string;
-  thumbnail: string;
-  link: string;
-  description: string;
-  format: "landscape" | "portrait";
-  tags: string[];
-}
+type Tab = "reels" | "creatives";
 
-interface CreativeItem {
-  title: string;
-  image: string;
-  description: string;
-}
+// Group the Stories outlets together so the filter stays short
+const clientGroup = (title: string) => (title.startsWith("Stories") ? "Stories" : clientName(title));
 
-interface WorksData {
-  videos: VideoItem[];
-  creatives: CreativeItem[];
-}
+const cardMotion = (i: number) => ({
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-40px" },
+  // Cap the stagger so long grids don't feel slow
+  transition: { duration: 0.7, ease: EASE_OUT, delay: Math.min(i % 4, 3) * 0.06 },
+});
 
 export default function OurWork() {
-  const [activeTab, setActiveTab] = useState<"videos" | "creatives">("videos");
-  const [worksData, setWorksData] = useState<WorksData>({ videos: [], creatives: [] });
-  const [selectedVideo, setSelectedVideo] = useState<VideoItem | null>(null);
-  const [selectedImage, setSelectedImage] = useState<CreativeItem | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { videos, creatives, loading } = useWorks();
+  const [tab, setTab] = useState<Tab>("reels");
+  const [client, setClient] = useState<string>("All");
+  const [videoIndex, setVideoIndex] = useState<number | null>(null);
+  const [imageIndex, setImageIndex] = useState<number | null>(null);
 
-  useEffect(() => {
-    const fetchWorksData = async () => {
-      try {
-        const response = await fetch("/works.json");
-        const data = await response.json();
-        setWorksData(data);
-      } catch (error) {
-        console.error("Error fetching works data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const clients = useMemo(() => ["All", ...Array.from(new Set(videos.map((v) => clientGroup(v.title))))], [videos]);
+  const filteredVideos = client === "All" ? videos : videos.filter((v) => clientGroup(v.title) === client);
+  const image = imageIndex === null ? null : creatives[imageIndex];
+  const stepImage = (dir: 1 | -1) =>
+    imageIndex !== null && setImageIndex((imageIndex + dir + creatives.length) % creatives.length);
 
-    fetchWorksData();
-  }, []);
-
-  const getAutoThumbnail = (video: VideoItem): string | null => {
-    if (video.thumbnail) return video.thumbnail;
-    try {
-      // YouTube Shorts e.g. https://youtube.com/shorts/VIDEO_ID
-      const ytShortsMatch = video.link.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/);
-      if (ytShortsMatch && ytShortsMatch[1]) {
-        return `https://img.youtube.com/vi/${ytShortsMatch[1]}/hqdefault.jpg`;
-      }
-      // YouTube embed e.g. https://www.youtube.com/embed/VIDEO_ID
-      const ytMatch = video.link.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/);
-      if (ytMatch && ytMatch[1]) {
-        return `https://img.youtube.com/vi/${ytMatch[1]}/hqdefault.jpg`;
-      }
-      // Vimeo embed e.g. https://player.vimeo.com/video/VIDEO_ID
-      const vimeoMatch = video.link.match(/vimeo\.com\/video\/(\d+)/);
-      if (vimeoMatch && vimeoMatch[1]) {
-        return `https://vumbnail.com/${vimeoMatch[1]}.jpg`;
-      }
-    } catch {}
-    return null;
-  };
-
-  const getEmbedUrl = (video: VideoItem): string => {
-    try {
-      // YouTube Shorts e.g. https://youtube.com/shorts/VIDEO_ID
-      const ytShortsMatch = video.link.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/);
-      if (ytShortsMatch && ytShortsMatch[1]) {
-        return `https://www.youtube.com/embed/${ytShortsMatch[1]}?autoplay=1&mute=0`;
-      }
-      // YouTube embed e.g. https://www.youtube.com/embed/VIDEO_ID
-      const ytMatch = video.link.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/);
-      if (ytMatch && ytMatch[1]) {
-        // Add autoplay to existing embed URL
-        const hasParams = video.link.includes('?');
-        return `${video.link}${hasParams ? '&' : '?'}autoplay=1&mute=0`;
-      }
-      // Vimeo embed e.g. https://player.vimeo.com/video/VIDEO_ID
-      const vimeoMatch = video.link.match(/vimeo\.com\/video\/(\d+)/);
-      if (vimeoMatch && vimeoMatch[1]) {
-        // Add autoplay to Vimeo URL
-        const hasParams = video.link.includes('?');
-        return `${video.link}${hasParams ? '&' : '?'}autoplay=1`;
-      }
-    } catch {}
-    return video.link; // Fallback to original link
-  };
-
-  const openVideoModal = (video: VideoItem) => {
-    setSelectedVideo(video);
-    if (typeof document !== 'undefined') {
-      document.body.classList.add('modal-open');
-    }
-  };
-
-  const openImageModal = (creative: CreativeItem) => {
-    setSelectedImage(creative);
-    if (typeof document !== 'undefined') {
-      document.body.classList.add('modal-open');
-    }
-  };
-
-  const closeModals = () => {
-    setSelectedVideo(null);
-    setSelectedImage(null);
-    if (typeof document !== 'undefined') {
-      document.body.classList.remove('modal-open');
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-orange-500 text-xl">Loading...</div>
-      </div>
-    );
-  }
+  const tabs: { id: Tab; label: string; count: number }[] = [
+    { id: "reels", label: "Reels", count: videos.length },
+    { id: "creatives", label: "Creatives", count: creatives.length },
+  ];
 
   return (
-    <div className="relative">
-      <Footer />
-      <div className="relative z-10 min-h-screen bg-black rounded-b-[80px] md:rounded-b-[150px] mb-[100vh] shadow-[0_40px_80px_rgba(0,0,0,0.45)]">
-      <Navbar />
-
-      {/* Hero Section */}
-      <section className="pt-24 pb-16 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
-          >
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6">
-              Our Work
-            </h1>
-            <p className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              A showcase of the brands we've partnered with and the stories we've helped bring to life — 
-              through striking visuals, captivating videos, and result-driven campaigns.
-            </p>
-          </motion.div>
-
-          {/* Toggle Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex justify-center mb-12"
-          >
-            <div className="bg-gray-900/50 backdrop-blur-sm rounded-full p-1 border border-gray-700">
+    <PageShell>
+      <PageHeader
+        eyebrow="Our work"
+        lines={["Work that", <span className="accent">moves.</span>]}
+        intro="The brands we've partnered with and the stories we've helped bring to life — through striking visuals, scroll-stopping reels and campaigns built to perform."
+        aside={
+          <div role="tablist" aria-label="Work type" className="flex rounded-full border border-line p-1">
+            {tabs.map((t) => (
               <button
-                onClick={() => setActiveTab("videos")}
-                className={`px-8 py-3 rounded-full font-semibold transition-all duration-300 ${
-                  activeTab === "videos"
-                    ? "bg-orange-500 text-white shadow-lg"
-                    : "text-gray-400 hover:text-white"
+                key={t.id}
+                role="tab"
+                aria-selected={tab === t.id}
+                onClick={() => setTab(t.id)}
+                className={`relative flex min-h-[44px] items-center gap-2 rounded-full px-5 text-[15px] transition-colors duration-200 ${
+                  tab === t.id ? "text-ink" : "text-mute hover:text-bone"
                 }`}
               >
-                Reels
+                {tab === t.id && (
+                  <motion.span
+                    layoutId="work-tab"
+                    className="absolute inset-0 rounded-full bg-bone"
+                    transition={{ type: "spring", duration: 0.45, bounce: 0.15 }}
+                  />
+                )}
+                <span className="relative">{t.label}</span>
+                <span className="relative font-mono text-xs opacity-60">{t.count}</span>
               </button>
+            ))}
+          </div>
+        }
+      />
+
+      <section className="mx-auto max-w-[1400px] px-5 pb-24 sm:px-8 lg:px-12">
+        {tab === "reels" && clients.length > 2 && (
+          <div className="scrollbar-hide -mx-5 mb-8 flex gap-2 overflow-x-auto px-5 sm:mx-0 sm:flex-wrap sm:px-0">
+            {clients.map((c) => (
               <button
-                onClick={() => setActiveTab("creatives")}
-                className={`px-8 py-3 rounded-full font-semibold transition-all duration-300 ${
-                  activeTab === "creatives"
-                    ? "bg-orange-500 text-white shadow-lg"
-                    : "text-gray-400 hover:text-white"
+                key={c}
+                onClick={() => setClient(c)}
+                aria-pressed={client === c}
+                className={`shrink-0 rounded-full border px-4 py-2 text-sm transition-colors duration-200 ${
+                  client === c ? "border-flame bg-flame/10 text-bone" : "border-line text-mute hover:border-bone/40 hover:text-bone"
                 }`}
               >
-                Creatives
+                {c}
               </button>
-            </div>
-          </motion.div>
+            ))}
+          </div>
+        )}
 
-          {/* Content Grid */}
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-          >
-            {activeTab === "videos" ? (
-              worksData.videos.map((video, index) => (
-                <motion.div
-                  key={video.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group cursor-pointer"
-                  onClick={() => openVideoModal(video)}
+        {loading ? (
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div key={i} className="aspect-[9/16] animate-pulse rounded-2xl bg-ink-high" />
+            ))}
+          </div>
+        ) : tab === "reels" ? (
+          <div key={`reels-${client}`} className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            {filteredVideos.map((video, i) => (
+              <motion.div key={video.link} {...cardMotion(i)}>
+                <ReelCard video={video} index={videos.indexOf(video)} onOpen={() => setVideoIndex(i)} />
+              </motion.div>
+            ))}
+          </div>
+        ) : (
+          <div key="creatives" className="columns-2 gap-3 sm:gap-4 lg:columns-3">
+            {creatives.map((creative, i) => (
+              <motion.div key={creative.image} className="mb-3 break-inside-avoid sm:mb-4" {...cardMotion(i)}>
+                <button
+                  type="button"
+                  onClick={() => setImageIndex(i)}
+                  className="group relative block w-full overflow-hidden rounded-2xl bg-ink-high text-left transition-transform duration-200 ease-out active:scale-[0.98]"
+                  aria-label={`View ${creative.title}`}
                 >
-                  <div className={`relative overflow-hidden rounded-lg bg-gray-900 ${video.format === 'landscape' ? 'aspect-video' : 'aspect-[9/16]'}`}>
-                    {/* Thumbnail */}
-                    {(getAutoThumbnail(video)) && (
-                      <img
-                        src={getAutoThumbnail(video) as string}
-                        alt={video.title}
-                        className="absolute inset-0 w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    )}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-14 h-14 sm:w-16 sm:h-16 bg-orange-500/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <Play className="w-6 h-6 text-white ml-1" />
-                      </div>
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                      <h3 className="text-white font-semibold text-sm group-hover:text-orange-400 transition-colors mb-2">
-                        {video.title}
-                      </h3>
-                      {/* Tags */}
-                      <div className="flex flex-wrap gap-1">
-                        {video.tags.slice(0, 2).map((tag, tagIndex) => (
-                          <span
-                            key={tagIndex}
-                            className="px-2 py-1 rounded-full text-xs font-medium bg-pink-500/80 text-white"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                        {video.tags.length > 2 && (
-                          <span className="px-2 py-1 rounded-full text-xs font-medium bg-gray-600/80 text-gray-200">
-                            +{video.tags.length - 2}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    {/* Format indicator */}
-                    <div className="absolute top-2 right-2">
-                      <div className="px-2 py-1 rounded-full text-xs font-medium bg-pink-500/80 text-white uppercase">
-                        {video.format === 'landscape' ? '16:9' : '9:16'}
-                      </div>
-                    </div>
+                  <img
+                    src={creative.thumb ?? creative.image}
+                    alt={creative.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/80 via-transparent to-transparent p-4 opacity-100 transition-opacity duration-300 sm:p-5 lg:opacity-0 lg:group-hover:opacity-100">
+                    <p className="headline flex-1 text-xl text-bone sm:text-2xl">{creative.title}</p>
+                    <Expand size={18} className="mb-1 shrink-0 text-bone" />
                   </div>
-                </motion.div>
-              ))
-            ) : (
-              worksData.creatives.map((creative, index) => (
-                <motion.div
-                  key={creative.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group cursor-pointer"
-                  onClick={() => openImageModal(creative)}
-                >
-                  <div className="relative overflow-hidden rounded-lg bg-gray-900 aspect-square">
-                    {/* Image */}
-                    <img
-                      src={creative.image}
-                      alt={creative.title}
-                      className="absolute inset-0 w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                    {/* Removed center open icon overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                      <h3 className="text-white font-semibold text-sm group-hover:text-orange-400 transition-colors">
-                        {creative.title}
-                      </h3>
-                    </div>
-                  </div>
-                </motion.div>
-              ))
-            )}
-          </motion.div>
-        </div>
+                </button>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </section>
 
-      <FooterStrip />
-      </div>
+      <Contact />
 
-      {/* Video Modal */}
-      <AnimatePresence>
-        {selectedVideo && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-sm"
-            onClick={closeModals}
-          >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              className="relative w-full max-w-4xl bg-black rounded-lg overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={closeModals}
-                className="absolute top-4 right-4 z-10 w-10 h-10 bg-black/50 rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors"
-              >
-                <X className="w-6 h-6" />
-              </button>
-              <div className={`${selectedVideo?.format === 'landscape' ? 'aspect-video max-w-3xl' : 'aspect-[9/16] max-w-sm'} mx-auto w-full`}>
-                <iframe
-                  src={getEmbedUrl(selectedVideo)}
-                  title={selectedVideo.title}
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                <h3 className="text-xl font-bold text-white">{selectedVideo.title}</h3>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <VideoLightbox videos={filteredVideos} index={videoIndex} onChange={setVideoIndex} />
 
-      {/* Image Modal */}
-      <AnimatePresence>
-        {selectedImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm"
-            onClick={closeModals}
-          >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              className="relative max-w-5xl max-h-[90vh] bg-black rounded-lg overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={closeModals}
-                className="absolute top-4 right-4 z-10 w-10 h-10 bg-black/50 rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors"
-              >
-                <X className="w-6 h-6" />
-              </button>
-              <div className="w-auto h-auto max-w-5xl max-h-[80vh] flex items-center justify-center bg-black">
-                <img
-                  src={selectedImage.image}
-                  alt={selectedImage.title}
-                  className="object-contain max-w-full max-h-[80vh]"
-                />
-              </div>
-              <div className="p-4 sm:p-6">
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-1">{selectedImage.title}</h3>
-                <p className="text-gray-300 text-sm sm:text-base">{selectedImage.description}</p>
-              </div>
-            </motion.div>
-          </motion.div>
+      <Lightbox
+        open={image !== null}
+        label={image?.title ?? "Creative"}
+        onClose={() => setImageIndex(null)}
+        onPrev={() => stepImage(-1)}
+        onNext={() => stepImage(1)}
+        caption={
+          image && (
+            <>
+              <p className="headline text-2xl text-bone">{image.title}</p>
+              <p className="mx-auto mt-2 max-w-xl text-sm text-mute">{image.description}</p>
+            </>
+          )
+        }
+      >
+        {image && (
+          <img
+            key={image.image}
+            src={image.image}
+            alt={image.title}
+            className="max-h-[72vh] w-auto max-w-full rounded-2xl object-contain"
+          />
         )}
-      </AnimatePresence>
-    </div>
+      </Lightbox>
+    </PageShell>
   );
 }

@@ -10,7 +10,30 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontFamily: {
+        sans: ['"Bricolage Grotesque"', "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ['"Bricolage Grotesque"', "ui-sans-serif", "system-ui", "sans-serif"],
+        serif: ['"Instrument Serif"', "ui-serif", "Georgia", "serif"],
+        mono: ['"Geist Mono"', "ui-monospace", "SFMono-Regular", "monospace"],
+      },
+      transitionTimingFunction: {
+        out: "cubic-bezier(0.22, 1, 0.36, 1)",
+        "in-out": "cubic-bezier(0.77, 0, 0.175, 1)",
+      },
       colors: {
+        // Hex (not CSS vars) so opacity modifiers like bg-flame/10 work; keep in sync with :root in index.css
+        ink: {
+          DEFAULT: "#0a0a0a",
+          raised: "#121212",
+          high: "#1b1b1b",
+        },
+        bone: "#f2eee8",
+        mute: "#8f8a84",
+        line: "var(--line)",
+        flame: {
+          DEFAULT: "#f76300",
+          deep: "#d65500",
+        },
         background: "var(--background)",
         foreground: "var(--foreground)",
         card: {

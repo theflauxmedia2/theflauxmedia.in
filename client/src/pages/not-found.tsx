@@ -1,21 +1,32 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { Link } from "wouter";
+import { Headline } from "@/components/motion";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-4">
-        <CardContent className="pt-6">
-          <div className="flex mb-4 gap-2">
-            <AlertCircle className="h-8 w-8 text-red-500" />
-            <h1 className="text-2xl font-bold text-gray-900">404 Page Not Found</h1>
-          </div>
-
-          <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
-          </p>
-        </CardContent>
-      </Card>
-    </div>
+    <main className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-5 sm:px-8 lg:px-12">
+      <div aria-hidden className="pointer-events-none absolute -left-40 top-1/4 h-[480px] w-[480px] bg-[radial-gradient(closest-side,rgba(247,99,0,0.20),transparent)]" />
+      <div className="relative mx-auto w-full max-w-[1400px]">
+        <p className="eyebrow mb-8">Error 404</p>
+        <Headline
+          as="h1"
+          onMount
+          className="text-[18vw] text-bone sm:text-9xl"
+          lines={["This page", <>got <span className="accent">cut.</span></>]}
+        />
+        <p className="mt-8 max-w-md text-lg text-mute">
+          It didn't make the final edit. Let's get you back to something worth watching.
+        </p>
+        <div className="mt-10 flex flex-wrap gap-3">
+          <Link href="/" className="btn btn-primary group">
+            Back home
+            <ArrowUpRight size={16} className="btn-arrow" />
+          </Link>
+          <Link href="/our-work" className="btn btn-ghost">
+            See our work
+          </Link>
+        </div>
+      </div>
+    </main>
   );
 }

@@ -194,15 +194,19 @@
     animation-play-state: paused;
   }
 
-  /* Reveal footer layer behind the page panel */
+  /* Reveal footer layer behind the page panel (md+); in normal flow on small screens */
   .footer-takeover {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    height: 100vh;
-    max-height: 100dvh;
-    overflow: hidden;
+    position: relative;
     background: radial-gradient(ellipse at 50% 120%, rgba(247, 99, 0, 0.22) 0%, transparent 55%), var(--ink);
+  }
+  @media (min-width: 768px) {
+    .footer-takeover {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      height: 100vh;
+      max-height: 100dvh;
+    }
   }
 }
 

@@ -99,6 +99,7 @@ export default function CaseStudy({ params }: { params: { slug: string } }) {
                       onClick={() => setImageIndex(i)}
                       className="group relative block w-full overflow-hidden rounded-2xl bg-ink-high"
                       aria-label={`View ${c.title}`}
+                      data-cursor="View"
                     >
                       <img
                         src={c.thumb ?? c.image}

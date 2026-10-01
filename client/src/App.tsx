@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import FloatingNav from "@/components/floating-nav";
 import HeadSync from "@/seo/head-sync";
+import CustomCursor from "@/components/custom-cursor";
 import Home from "@/pages/home";
 import About from "@/pages/about";
 import Services from "@/pages/services";
@@ -74,6 +75,7 @@ function App() {
           <HeadSync />
           <Router />
           <FloatingNav />
+          <CustomCursor />
         </MotionConfig>
       </TooltipProvider>
     </QueryClientProvider>

@@ -23,6 +23,7 @@ export default function CaseCards({ slugs, className = "" }: { slugs: string[]; 
           <li key={cs.slug}>
             <Link
               href={casePath(cs.slug)}
+              data-cursor="View"
               className="group block overflow-hidden rounded-2xl border border-line bg-ink-raised transition-colors duration-300 hover:border-bone/30"
             >
               {cover && (

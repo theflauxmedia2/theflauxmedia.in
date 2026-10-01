@@ -1,4 +1,4 @@
-import { ArrowDownRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
 import { Headline, enterStyle, useOffscreenPause } from "@/components/motion";
 import { useWorks, videoThumbnail } from "@/lib/works";
@@ -136,12 +136,6 @@ export default function Hero() {
             ))}
           </div>
         </div>
-        <a
-          href="#work"
-          className="eyebrow absolute -top-12 left-5 hidden items-center gap-2 hover:text-bone sm:left-8 lg:left-12 lg:flex"
-        >
-          Scroll <ArrowDownRight size={14} />
-        </a>
       </div>
     </section>
   );

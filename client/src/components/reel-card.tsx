@@ -15,6 +15,7 @@ export default function ReelCard({ video, index, onOpen, className = "", eager =
 
   return (
     <button
+      data-cursor="Play"
       type="button"
       onClick={onOpen}
       className={`group relative block w-full overflow-hidden rounded-2xl bg-ink-high text-left transition-transform duration-200 ease-out active:scale-[0.98] ${

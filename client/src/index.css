@@ -214,6 +214,125 @@
   }
 }
 
+/* Custom cursor — only on fine pointers once JS has enabled it (see components/custom-cursor.tsx) */
+.cursor-layer {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: none !important;
+  }
+  html.has-custom-cursor :is(input, textarea, select, [contenteditable="true"]) {
+    cursor: text !important;
+  }
+  html.has-custom-cursor .cursor-layer {
+    display: block;
+  }
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 300;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.cursor-dot::before {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 9999px;
+  background: var(--flame);
+  transition:
+    transform 200ms var(--ease-out),
+    opacity 200ms ease;
+}
+
+.cursor-ring-shape {
+  --s: 0.5;
+  --press: 1;
+  position: absolute;
+  display: flex;
+  width: 72px;
+  height: 72px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(242, 238, 232, 0.55);
+  transform: translate(-50%, -50%) scale(calc(var(--s) * var(--press)));
+  transition:
+    transform 320ms var(--ease-out),
+    background-color 220ms ease,
+    border-color 220ms ease,
+    opacity 200ms ease;
+}
+
+.cursor-label {
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+/* Hover over links/buttons: bigger, warmer ring */
+.cursor-ring[data-state="hover"] .cursor-ring-shape {
+  --s: 0.9;
+  border-color: var(--flame);
+  background-color: rgba(247, 99, 0, 0.08);
+}
+
+/* Labelled targets (reels, posters): solid bubble with text, dot tucks away */
+.cursor-ring[data-state="label"] .cursor-ring-shape {
+  --s: 1.15;
+  border-color: var(--flame);
+  background-color: var(--flame);
+}
+.cursor-ring[data-state="label"] .cursor-label {
+  opacity: 1;
+  transition-delay: 80ms;
+}
+.cursor-dot[data-state="label"]::before {
+  transform: scale(0);
+}
+
+/* Text fields: native caret only */
+.cursor-ring[data-state="hidden"] .cursor-ring-shape,
+.cursor-dot[data-state="hidden"]::before {
+  opacity: 0;
+}
+
+/* Press feedback */
+html[data-cursor-down="true"] .cursor-ring-shape {
+  --press: 0.82;
+}
+html[data-cursor-down="true"] .cursor-dot::before {
+  transform: scale(0.6);
+}
+
+/* Hidden until the first move and whenever the pointer leaves the window */
+html:not([data-cursor-visible="true"]) .cursor-layer {
+  opacity: 0;
+}
+.cursor-layer {
+  transition: opacity 200ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-ring-shape,
+  .cursor-dot::before {
+    transition: opacity 150ms ease, background-color 150ms ease, border-color 150ms ease;
+  }
+}
+
 @layer utilities {
   .scrollbar-hide {
     -ms-overflow-style: none;

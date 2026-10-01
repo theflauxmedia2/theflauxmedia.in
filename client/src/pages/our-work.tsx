@@ -125,6 +125,7 @@ export default function OurWork() {
                   onClick={() => setImageIndex(i)}
                   className="group relative block w-full overflow-hidden rounded-2xl bg-ink-high text-left transition-transform duration-200 ease-out active:scale-[0.98]"
                   aria-label={`View ${creative.title}`}
+                  data-cursor="View"
                 >
                   <img
                     src={creative.thumb ?? creative.image}

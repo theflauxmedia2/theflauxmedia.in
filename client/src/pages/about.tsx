@@ -29,6 +29,21 @@ const VALUES = [
   },
 ];
 
+const TEAM = [
+  {
+    name: "Kaif",
+    role: "Co-Founder",
+    description:
+      "Handles procurement, scripting, social page management and Google Business Profile — keeping every brand's presence organised and visible.",
+  },
+  {
+    name: "Abhishek",
+    role: "Co-Founder",
+    description:
+      "Leads video editing and the creative thinking — shaping the ideas, edits and visuals that make the work stand out.",
+  },
+];
+
 const COLLAGE = [
   creative("cosmo-cocktail-poster-stories-nagarbhavi"),
   creative("caramel-cheesecake-poster-stories-rajajinagar"),
@@ -124,6 +139,27 @@ export default function About() {
             </p>
           </div>
         </div>
+      </section>
+
+      {/* Team */}
+      <section className="mx-auto max-w-[1400px] border-t border-line px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
+        <Eyebrow className="mb-6">The team</Eyebrow>
+        <ul className="grid grid-cols-1 border-t border-line sm:grid-cols-2">
+          {TEAM.map((member, i) => (
+            <motion.li
+              key={member.name}
+              className="border-b border-line py-10 sm:odd:border-r sm:odd:pr-10 sm:even:pl-10"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.7, ease: EASE_OUT, delay: i * 0.08 }}
+            >
+              <span className="eyebrow !text-flame">{member.role}</span>
+              <h3 className="headline mt-4 text-4xl text-bone">{member.name}</h3>
+              <p className="mt-3 max-w-md leading-relaxed text-mute">{member.description}</p>
+            </motion.li>
+          ))}
+        </ul>
       </section>
 
       {/* Values */}
